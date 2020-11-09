@@ -1,0 +1,25 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'dev.mythos'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url myMavenRepoReadUrl
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation "dev.mythos:mythos-jvm:0.0.1"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+}

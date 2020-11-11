@@ -73,15 +73,16 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
         action("go (.*)") { (direction) ->
             when (direction) {
                 "north" -> {
-                    if (x + 1 < currentLevel.size && currentLevel[x + 1][y][z][w] != null) {
+                    if (x + 1 < currentLevel.size && currentLevel[x + 1][y][z][w] != null && doors.contains("north")) {
                         x = x + 1
                         go(currentLevel[x][y][z][w]!!)
-                    } else {
+                    }
+                    else {
                         say("There's nothing in that direction.")
                     }
                 }
                 "south" -> {
-                    if (x - 1 >= 0 && currentLevel[x - 1][y][z][w] != null) {
+                    if (x - 1 >= 0 && currentLevel[x - 1][y][z][w] != null && doors.contains("south")) {
                         x = x - 1
                         go(currentLevel[x][y][z][w]!!)
                     } else {
@@ -89,7 +90,7 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
                     }
                 }
                 "east" -> {
-                    if (y + 1 < currentLevel[x].size && currentLevel[x][y + 1][z][w] != null) {
+                    if (y + 1 < currentLevel[x].size && currentLevel[x][y + 1][z][w] != null && doors.contains("east")) {
                         y = y + 1
                         go(currentLevel[x][y][z][w]!!)
                     } else {
@@ -97,7 +98,7 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
                     }
                 }
                 "west" -> {
-                    if (y - 1 >= 0 && currentLevel[x][y - 1][z][w] != null) {
+                    if (y - 1 >= 0 && currentLevel[x][y - 1][z][w] != null && doors.contains("west")) {
                         y = y - 1
                         go(currentLevel[x][y][z][w]!!)
                     } else {
@@ -148,7 +149,7 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
 
 
 val main = game {
-    level1[0][0][0][0] = mazeRoom(number = "0.0.0", color = "red", doors = listOf("north", "east", ), ladderDirection = "up")
+    level1[0][0][0][0] = mazeRoom(number = "0.0.0", color = "red", doors = listOf("north", "east", ))
     level1[0][1][0][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf("north", "west", ), ladderDirection = "up")
     level1[1][0][0][0] = mazeRoom(number = "1.0.0", color = "red", doors = listOf("south", "east", ), ladderDirection = "up")
     level1[1][1][0][0] = mazeRoom(number = "1.1.0", color = "red", doors = listOf("south", "west"), ladderDirection = "up")

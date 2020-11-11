@@ -33,6 +33,8 @@ var w = 0
 
 var currentLevel = level1
 
+var hasStarted = false
+
 fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection: String? = null, other: String? = null): Room {
     val doors = when {
         doors.size == 0 -> "There aren't any doors"
@@ -50,6 +52,42 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
     }
     return room() {
         onEnter {
+            if (!hasStarted) {
+                say("Welcome to Shift! Please read these instructions carefully!")
+                say("In this game you will be presented with a series of mazes.")
+                say("The room you're currently in will always be shown by the most recent box, which will look something like this:")
+                say("""
+                    ┌─────┐
+                    │     │
+                    └─────┘
+                    """.trimIndent())
+                say("To navigate these mazes, you can type things like 'go north', or 'go east,' to move through doors, if there are any.")
+                say("If there's a ladder, you can also say 'go up' or 'go down.'")
+                say("Remember when you're looking at the screen, north is always up, south is down, east is right, and west is left.")
+                say("There's reminder text below each box that tells you which walls have doors, and provides additional info.")
+                say("But if you ever get confused about directions, you can say, 'show compass,' and this will appear on your screen:")
+                say("""
+                       ▲
+                       N
+                   ◄W    E►
+                       S
+                       ▼
+                       
+                    """.trimIndent())
+                say("Doors are represented by this symbol: ║ for east or west.")
+                say("And by this symbol: ═══ for north and south.")
+                say("Ladders, both up and down, are represented by this: #")
+                say("Refer to the text below the map to know whether a ladder goes up or down, and any other info about the room.")
+                say("")
+                say("In addition to moving in the three dimensions we're familiar with via ladders and doors, you can also at any moment shift ana or kata.")
+                say("This is a special power you can do anywhere, as long as there's a room in that direction, which you'll only find out by trying.")
+                say("Remember, ana and kata are directions along a third axis, so it's not up, down, north, south, east or west.")
+                say("They're two entirely different spacial directions.")
+                say("To move ana or kata, say, 'shift ana' or 'shift kata.'")
+                say("Your goal in every maze will always be to find the room with this symbol in the middle: *")
+                say("Good luck!")
+                hasStarted = true
+            }
             val top = when {
                 doors.contains("north") -> "┌─═══─┐"
                 else -> "┌─────┐"
@@ -193,6 +231,16 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
                 say("I don't understand.")
             }
         }
+        action("show compass") {
+            say("""
+                       ▲
+                       N
+                   ◄W    E►
+                       S
+                       ▼
+                       
+                    """.trimIndent())
+        }
     }
 }
 
@@ -200,7 +248,7 @@ fun mazeRoom(number: String, color: String, doors: List<String>, ladderDirection
 val main = game {
     //region level1 rooms
     level1[0][0][0][0] = mazeRoom(number = "0.0.0", color = "red", doors = listOf("east"), ladderDirection = "up", other = "finish")
-    level1[0][1][0][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf(), ladderDirection = "up")
+    level1[0][1][0][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf(), ladderDirection = "up", other = "HINT: You're looking for the room with 0.0.0 marked in red.")
 
     level1[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"), ladderDirection = "")
     level1[0][1][1][0] = mazeRoom(number = "0.1.1", color = "red", doors = listOf("west"), ladderDirection = "down")

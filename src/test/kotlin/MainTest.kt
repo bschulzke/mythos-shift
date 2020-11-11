@@ -6,9 +6,13 @@ class MainTest {
     @Test
     fun testTheGame() {
         assertFollows(main, branch {
-            game("Welcome to Mythos!")
-            player("say hello")
-            game("Thanks for joining us!")
+            player("go up")
+            player("go west")
+            player("shift kata")
+            player("go down")
+            player("shift ana")
+            player("yes")
+            game(Regex(".*0\\.0\\.0.*"))
         })
     }
 }

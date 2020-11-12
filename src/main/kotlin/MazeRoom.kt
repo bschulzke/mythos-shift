@@ -25,7 +25,13 @@ fun mazeRoom(
     }
     return room() {
         onEnter {
-            if (!hasStarted) {
+            if (!hasStarted2 && hasStarted1 && currentLevel == level2) {
+                say("")
+                say("WELCOME TO LEVEL 2!")
+                say("Hint: The final room is marked marked 1.1.1 in blue.")
+                hasStarted2 = true
+            }
+            if (!hasStarted1) {
                 say("Welcome to Shift! Please read these instructions carefully!")
                 say("In this game you will be presented with a series of mazes.")
                 say("The room you're currently in will always be shown by the most recent box, which will look something like this:")
@@ -59,7 +65,10 @@ fun mazeRoom(
                 say("To move ana or kata, say, 'shift ana' or 'shift kata.'")
                 say("Your goal in every maze will always be to find the room with this symbol in the middle: *")
                 say("Good luck!")
-                hasStarted = true
+                say("")
+                say("WELCOME TO LEVEL 1!")
+                say("HINT: You're looking for the room with 0.0.0 marked in red.")
+                hasStarted1 = true
             }
             val top = when {
                 doors.contains("north") -> "┌─═══─┐"

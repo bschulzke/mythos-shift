@@ -32,7 +32,8 @@ var w = 0
 
 var currentLevel = level1
 
-var hasStarted = false
+var hasStarted1 = false
+var hasStarted2 = false
 
 
 val main = game {
@@ -55,7 +56,6 @@ val main = game {
             color = "red",
             doors = listOf(),
             ladderDirection = "up",
-            other = "HINT: You're looking for the room with 0.0.0 marked in red.",
     )
 
     level1[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"), ladderDirection = "")
@@ -72,28 +72,32 @@ val main = game {
     level2[0][0][0][0] = mazeRoom(
             number = "0.0.0",
             color = "red",
-            doors = listOf("north", "east", ),
-            ladderDirection = "up",
-            other = "Hint: The final room is marked with [TBD]."
+            doors = listOf("east", ),
     )
-    level2[0][1][0][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf("north", "west", ), ladderDirection = "up")
-    level2[1][0][0][0] = mazeRoom(number = "1.0.0", color = "red", doors = listOf("south", "east", ), ladderDirection = "up")
-    level2[1][1][0][0] = mazeRoom(number = "1.1.0", color = "red", doors = listOf("south", "west"), ladderDirection = "up")
+    level2[0][1][0][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf("west",),)
+    level2[1][0][0][0] = mazeRoom(number = "1.0.0", color = "red", doors = listOf("east",),)
+    level2[1][1][0][0] = mazeRoom(number = "1.1.0", color = "red", doors = listOf("west"),)
 
-    level2[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("north", "east", ), ladderDirection = "down")
-    level2[0][1][1][0] = mazeRoom(number= "0.1.1", color = "red", doors = listOf("north", "west",), ladderDirection = "down")
-    level2[1][0][1][0] = mazeRoom(number = "1.0.1", color = "red", doors = listOf("south", "east"), ladderDirection = "down")
-    level2[1][1][1][0] = mazeRoom(number = "1.1.1", color = "red", doors = listOf("south", "west"), ladderDirection = "down")
+    level2[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"),)
+    level2[0][1][1][0] = mazeRoom(number= "0.1.1", color = "red", doors = listOf("west"),)
+    level2[1][0][1][0] = mazeRoom(number = "1.0.1", color = "red", doors = listOf(),)
+    level2[1][1][1][0] = mazeRoom(number = "1.1.1", color = "red", doors = listOf(),)
 
-    level2[0][0][0][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north", "east", ), ladderDirection = "up")
-    level2[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("north", "west", ), ladderDirection = "up")
-    level2[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south", "east"), ladderDirection = "up")
-    level2[1][1][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south", "west"), ladderDirection = "up")
+    level2[0][0][0][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north", "east"),)
+    level2[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("west", ),)
+    level2[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south",),)
+    level2[1][1][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf(), ladderDirection = "up")
 
-    level2[1][1][1][1] = mazeRoom(number = "1.1.1", color = "blue", doors = listOf("south", "west"), ladderDirection = "down")
-    level2[0][1][1][1] = mazeRoom(number = "0.1.1", color = "blue", doors = listOf("north", "west"), ladderDirection = "down")
-    level2[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north", "east"), ladderDirection = "down")
-    level2[1][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("south", "east",), ladderDirection = "down")
+    level2[1][1][1][1] = mazeRoom(number = "1.1.1", color = "blue", doors = listOf("west"), ladderDirection = "down",)
+    level2[0][1][1][1] = mazeRoom(
+            number = "0.1.1",
+            color = "blue",
+            doors = listOf(),
+            isFinish = true,
+            other = "You finished Level 2!"
+    )
+    level2[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north",),)
+    level2[1][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("south", "east"),)
     //endregion
 
     initialRoom = level1[0][1][0][0]!!

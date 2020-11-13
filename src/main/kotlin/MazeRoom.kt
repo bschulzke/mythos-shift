@@ -208,14 +208,15 @@ fun mazeRoom(
                 }
                 "up" -> {
                     if (
-                            playerPosition.z!! + 1 < currentLevel[playerPosition.x!!][playerPosition.y!!].size &&
+                            playerPosition.z!! + 1 < currentLevel.size &&
                             currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! + 1][playerPosition.w!!] != null &&
-                            ladderDirection!!.contains("up"))
-                    {
-                        playerPosition.z = playerPosition.z!! + 1
+                            doors.contains("north"))
+                    { playerPosition.z = playerPosition.z!! + 1
                         go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
+                    } else if (ladderDirection != null && ladderDirection.contains("up")) {
+                        say("There's a locked trapdoor at the top of the ladder.")
                     } else {
-                        say("There's no ladder that way.")
+                        say("There's no ladder going that way.")
                     }
                 }
                 "down" -> {

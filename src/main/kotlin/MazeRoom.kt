@@ -130,6 +130,7 @@ fun mazeRoom(
                 "north" -> {
                     if (x + 1 < currentLevel.size && currentLevel[x + 1][y][z][w] != null && doors.contains("north")) {
                         x = x + 1
+                        x = x + 1
                         go(currentLevel[x][y][z][w]!!)
                     } else if (doors.contains("north")) {
                         say("The door won't open.")

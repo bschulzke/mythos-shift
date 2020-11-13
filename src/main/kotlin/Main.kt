@@ -2,6 +2,15 @@ import dev.mythos.dsl.Room
 import dev.mythos.dsl.game
 import dev.mythos.game.runGame
 
+data class Coordinates(
+        var x: Int,
+        val y: Int,
+        val z: Int,
+        val w: Int
+)
+
+var playerPosition = Coordinates (x = 0, y = 1, z = 0, w = 0)
+
 val level1 =
 
         Array(1) {

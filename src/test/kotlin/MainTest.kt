@@ -6,6 +6,15 @@ class MainTest {
     @Test
     fun testLevel1() {
         assertFollows(main, branch {
+            player("show compass")
+            game("""
+                       ▲
+                       N
+                   ◄W    E►
+                       S
+                       ▼
+                       
+                    """.trimIndent())
             player("go up")
             game(Regex(".*0\\.1\\.1.*red.*"))
             player("go north")

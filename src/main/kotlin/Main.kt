@@ -3,13 +3,15 @@ import dev.mythos.dsl.game
 import dev.mythos.game.runGame
 
 data class Coordinates(
-        var x: Int,
-        var y: Int,
-        var z: Int,
-        var w: Int
+        var x: Int?,
+        var y: Int?,
+        var z: Int?,
+        var w: Int?,
 )
 
 var playerPosition = Coordinates (x = 0, y = 1, z = 0, w = 0)
+
+var boxes: Set<Coordinates> = setOf(Coordinates (x = null, y = null, z = null, w = null,), Coordinates (x = null, y = null, z = null, w = null),)
 
 val level1 =
 

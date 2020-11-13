@@ -87,17 +87,17 @@ fun mazeRoom(
             }
             else if (doors.contains("east") &&
                             ladderDirection != null &&
-                    currentLevel[a][b][c][d] == currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]
+                    currentLevel[a][b][c][d] == currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]
                     ) {
                 middle += " # ▆ ║"
             }
-            else if (ladderDirection != null && currentLevel[a][b][c][d] == currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+            else if (ladderDirection != null && currentLevel[a][b][c][d] == currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                 middle += " # ▆ │"
             }
-            else if (doors.contains("east") && currentLevel[a][b][c][d] == currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+            else if (doors.contains("east") && currentLevel[a][b][c][d] == currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                 middle += "  ▆  ║"
             }
-            else if (currentLevel[a][b][c][d] == currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+            else if (currentLevel[a][b][c][d] == currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                 middle += "  ▆  │"
             }
             else if (doors.contains("east") && ladder.contains("up")) {
@@ -131,14 +131,14 @@ fun mazeRoom(
             playerPosition.y = 0
             playerPosition.z = 0
             playerPosition.w = 0
-            go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+            go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
         }
         action("go (.*)") { (direction) ->
             when (direction) {
                 "north" -> {
-                    if (playerPosition.x + 1 < currentLevel.size && currentLevel[playerPosition.x + 1][playerPosition.y][playerPosition.z][playerPosition.w] != null && doors.contains("north")) {
-                        playerPosition.x = playerPosition.x + 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.x!! + 1 < currentLevel.size && currentLevel[playerPosition.x!! + 1][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("north")) {
+                        playerPosition.x = playerPosition.x!! + 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else if (doors.contains("north")) {
                         say("The door won't open.")
                     } else {
@@ -146,9 +146,9 @@ fun mazeRoom(
                     }
                 }
                 "south" -> {
-                    if (playerPosition.x - 1 >= 0 && currentLevel[playerPosition.x - 1][playerPosition.y][playerPosition.z][playerPosition.w] != null && doors.contains("south")) {
-                        playerPosition.x = playerPosition.x - 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.x!! - 1 >= 0 && currentLevel[playerPosition.x!! - 1][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("south")) {
+                        playerPosition.x = playerPosition.x!! - 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else if (doors.contains("south")) {
                         say("The door won't open.")
                     } else {
@@ -156,9 +156,12 @@ fun mazeRoom(
                     }
                 }
                 "east" -> {
-                    if (playerPosition.y + 1 < currentLevel[playerPosition.x].size && currentLevel[playerPosition.x][playerPosition.y + 1][playerPosition.z][playerPosition.w] != null && doors.contains("east")) {
-                        playerPosition.y = playerPosition.y + 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.y!! + 1 < currentLevel[playerPosition.x!!].size &&
+                            currentLevel[playerPosition.x!!][playerPosition.y!! + 1][playerPosition.z!!][playerPosition.w!!] != null &&
+                            doors.contains("east"))
+                    {
+                        playerPosition.y = playerPosition.y!! + 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else if (doors.contains("east")) {
                         say("The door won't open.")
                     } else {
@@ -166,9 +169,9 @@ fun mazeRoom(
                     }
                 }
                 "west" -> {
-                    if (playerPosition.y - 1 >= 0 && currentLevel[playerPosition.x][playerPosition.y - 1][playerPosition.z][playerPosition.w] != null && doors.contains("west")) {
-                        playerPosition.y = playerPosition.y - 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.y!! - 1 >= 0 && currentLevel[playerPosition.x!!][playerPosition.y!! - 1][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("west")) {
+                        playerPosition.y = playerPosition.y!! - 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else if (doors.contains("west")) {
                         say("The door won't open.")
                     } else {
@@ -176,17 +179,17 @@ fun mazeRoom(
                     }
                 }
                 "up" -> {
-                    if (playerPosition.z + 1 < currentLevel[playerPosition.x][playerPosition.y].size && currentLevel[playerPosition.x][playerPosition.y][playerPosition.z + 1][playerPosition.w] != null && ladderDirection!!.contains("up")) {
-                        playerPosition.z = playerPosition.z + 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.z!! + 1 < currentLevel[playerPosition.x!!][playerPosition.y!!].size && currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! + 1][playerPosition.w!!] != null && ladderDirection!!.contains("up")) {
+                        playerPosition.z = playerPosition.z!! + 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else {
                         say("There's no ladder that way.")
                     }
                 }
                 "down" -> {
-                    if (playerPosition.z - 1 >= 0 && currentLevel[playerPosition.x][playerPosition.y][playerPosition.z - 1][playerPosition.w] != null && ladderDirection!!.contains("down")) {
-                        playerPosition.z = playerPosition.z - 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.z!! - 1 >= 0 && currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! - 1][playerPosition.w!!] != null && ladderDirection!!.contains("down")) {
+                        playerPosition.z = playerPosition.z!! - 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else {
                         say("There's no ladder that way.")
                     }
@@ -196,17 +199,17 @@ fun mazeRoom(
         action("shift (.*)") { (direction) ->
             when (direction) {
                 "kata" -> {
-                    if (playerPosition.w + 1 < currentLevel[playerPosition.x][playerPosition.y][playerPosition.z].size && currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w + 1] != null) {
-                        playerPosition.w = playerPosition.w + 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.w!! + 1 < currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!].size && currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!! + 1] != null) {
+                        playerPosition.w = playerPosition.w!! + 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else {
                         say("There's nothing in that direction.")
                     }
                 }
                 "ana" -> {
-                    if (playerPosition.w - 1 >= 0 && currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w - 1] != null) {
-                        playerPosition.w = playerPosition.w - 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                    if (playerPosition.w!! - 1 >= 0 && currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!! - 1] != null) {
+                        playerPosition.w = playerPosition.w!! - 1
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else {
                         say("There's nothing in that direction.")
                     }
@@ -226,54 +229,54 @@ fun mazeRoom(
         action("push box (.*)") {(direction) ->
             when (direction) {
                 "north" -> {
-                    if (playerPosition.x + 1 < currentLevel.size && currentLevel[playerPosition.x + 1][playerPosition.y][playerPosition.z][playerPosition.w] != null && doors.contains("north")
-                            && currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]
+                    if (playerPosition.x!! + 1 < currentLevel.size && currentLevel[playerPosition.x!! + 1][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("north")
+                            && currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]
                     ) {
-                        playerPosition.x = playerPosition.x + 1
+                        playerPosition.x = playerPosition.x!! + 1
                         a = a + 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
-                    } else if (doors.contains("north")&& currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
+                    } else if (doors.contains("north")&& currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")
                     }
                 }
                 "south" -> {
-                    if (playerPosition.x - 1 >= 0 && currentLevel[playerPosition.x - 1][playerPosition.y][playerPosition.z][playerPosition.w] != null && doors.contains("south")
-                            && currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]
+                    if (playerPosition.x!! - 1 >= 0 && currentLevel[playerPosition.x!! - 1][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("south")
+                            && currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]
                     ) {
-                        playerPosition.x = playerPosition.x - 1
+                        playerPosition.x = playerPosition.x!! - 1
                         a = a - 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
-                    } else if (doors.contains("south") && currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
+                    } else if (doors.contains("south") && currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")
                     }
                 }
                 "east" -> {
-                    if (playerPosition.y + 1 < currentLevel[playerPosition.x].size && currentLevel[playerPosition.x][playerPosition.y + 1][playerPosition.z][playerPosition.w] != null && doors.contains("east")
-                            && currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]
+                    if (playerPosition.y!! + 1 < currentLevel[playerPosition.x!!].size && currentLevel[playerPosition.x!!][playerPosition.y!! + 1][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("east")
+                            && currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]
                     ) {
-                        playerPosition.y = playerPosition.y + 1
+                        playerPosition.y = playerPosition.y!! + 1
                         b = b + 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
-                    } else if (doors.contains("east")&& currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
+                    } else if (doors.contains("east")&& currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")
                     }
                 }
                 "west" -> {
-                    if (playerPosition.y - 1 >= 0 && currentLevel[playerPosition.x][playerPosition.y - 1][playerPosition.z][playerPosition.w] != null && doors.contains("west") &&
-                            currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
-                        playerPosition.y = playerPosition.y - 1
+                    if (playerPosition.y!! - 1 >= 0 && currentLevel[playerPosition.x!!][playerPosition.y!! - 1][playerPosition.z!!][playerPosition.w!!] != null && doors.contains("west") &&
+                            currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
+                        playerPosition.y = playerPosition.y!! - 1
                         b = b - 1
-                        go(currentLevel[playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]!!)
+                        go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     }
-                    else if (doors.contains("west" )&& currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]) {
+                    else if (doors.contains("west" )&& currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]) {
                         say("The door won't open.")}
-                    else if (currentLevel[a][b][c][d] == currentLevel [playerPosition.x][playerPosition.y][playerPosition.z][playerPosition.w]){
+                    else if (currentLevel[a][b][c][d] == currentLevel [playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]){
                         say("There's no door that way.")
                     }
                 }

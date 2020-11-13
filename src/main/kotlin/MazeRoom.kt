@@ -125,11 +125,18 @@ fun mazeRoom(
                 say("$other")
             }
         }
+        action("go to level two") {
+            currentLevel = level2
+            x = 0
+            y = 0
+            z = 0
+            w = 0
+            go(currentLevel[x][y][z][w]!!)
+        }
         action("go (.*)") { (direction) ->
             when (direction) {
                 "north" -> {
                     if (x + 1 < currentLevel.size && currentLevel[x + 1][y][z][w] != null && doors.contains("north")) {
-                        x = x + 1
                         x = x + 1
                         go(currentLevel[x][y][z][w]!!)
                     } else if (doors.contains("north")) {

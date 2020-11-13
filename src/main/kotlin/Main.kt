@@ -98,7 +98,7 @@ val main = game {
     level2[1][0][1][0] = mazeRoom(number = "1.0.1", color = "red", doors = listOf(),)
     level2[1][1][1][0] = mazeRoom(number = "1.1.1", color = "red", doors = listOf(),)
 
-    level2[0][0][0][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north", "east"),)
+    level2[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("north", "east"),)
     level2[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("west", ),)
     level2[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south",),)
     level2[1][1][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf(), ladderDirection = "up")

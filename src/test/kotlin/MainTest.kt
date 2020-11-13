@@ -28,4 +28,19 @@ class MainTest {
             game(Regex(".*0\\.0\\.0.*red.*"))
         })
     }
+    @Test
+    fun testLevel2() {
+        assertFollows(main, branch {
+            player("go to level two")
+            game(Regex(".*0\\.0\\.0.*red.*"))
+            player("go east")
+            game(Regex(".*0\\.1\\.0.*red.*"))
+            player("go south")
+            game("There's no door that way.")
+            player("go north")
+            game("There's no door that way.")
+            player("go up")
+            game("There's no ladder that way.")
+        })
+    }
 }

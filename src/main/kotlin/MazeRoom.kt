@@ -210,7 +210,7 @@ fun mazeRoom(
                     if (
                             playerPosition.z!! + 1 < currentLevel[playerPosition.x!!][playerPosition.y!!].size &&
                             currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! + 1][playerPosition.w!!] != null &&
-                            ladderDirection!!.contains("up"))
+                            ladderDirection != null && ladderDirection.contains("up"))
                     {
                         playerPosition.z = playerPosition.z!! + 1
                         go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
@@ -222,7 +222,7 @@ fun mazeRoom(
                     if (
                             playerPosition.z!! - 1 >= 0 &&
                             currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! - 1][playerPosition.w!!] != null &&
-                            ladderDirection!!.contains("down")) {
+                            ladderDirection != null && ladderDirection.contains("down")) {
                         playerPosition.z = playerPosition.z!! - 1
                         go(currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
                     } else {

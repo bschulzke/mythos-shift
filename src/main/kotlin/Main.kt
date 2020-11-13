@@ -11,6 +11,8 @@ data class Coordinates(
 
 var playerPosition = Coordinates (x = 0, y = 1, z = 0, w = 0)
 
+var random = setOf<String>()
+
 val level1 =
 
         Array(1) {

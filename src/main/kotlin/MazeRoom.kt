@@ -84,7 +84,23 @@ fun mazeRoom(
                 middle += "  *  ║"
             } else if (isFinish) {
                 middle += "  *  │"
-            } else if (doors.contains("east") && ladder.contains("up")) {
+            }
+            else if (doors.contains("east") &&
+                            ladderDirection != null &&
+                    currentLevel[a][b][c][d] == currentLevel[x][y][z][w]
+                    ) {
+                middle += " # ▆ ║"
+            }
+            else if (ladderDirection != null && currentLevel[a][b][c][d] == currentLevel[x][y][z][w]) {
+                middle += " # ▆ │"
+            }
+            else if (doors.contains("east") && currentLevel[a][b][c][d] == currentLevel[x][y][z][w]) {
+                middle += "  ▆  ║"
+            }
+            else if (currentLevel[a][b][c][d] == currentLevel[x][y][z][w]) {
+                middle += "  ▆  │"
+            }
+            else if (doors.contains("east") && ladder.contains("up")) {
                 middle += "  #  ║"
             } else if (doors.contains("east") && ladder.contains("down")) {
                 middle += "  #  ║"
@@ -125,7 +141,7 @@ fun mazeRoom(
                     if (x - 1 >= 0 && currentLevel[x - 1][y][z][w] != null && doors.contains("south")) {
                         x = x - 1
                         go(currentLevel[x][y][z][w]!!)
-                    } else if (doors.contains("north")) {
+                    } else if (doors.contains("south")) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")
@@ -135,7 +151,7 @@ fun mazeRoom(
                     if (y + 1 < currentLevel[x].size && currentLevel[x][y + 1][z][w] != null && doors.contains("east")) {
                         y = y + 1
                         go(currentLevel[x][y][z][w]!!)
-                    } else if (doors.contains("north")) {
+                    } else if (doors.contains("east")) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")
@@ -145,7 +161,7 @@ fun mazeRoom(
                     if (y - 1 >= 0 && currentLevel[x][y - 1][z][w] != null && doors.contains("west")) {
                         y = y - 1
                         go(currentLevel[x][y][z][w]!!)
-                    } else if (doors.contains("north")) {
+                    } else if (doors.contains("west")) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")
@@ -156,7 +172,7 @@ fun mazeRoom(
                         z = z + 1
                         go(currentLevel[x][y][z][w]!!)
                     } else {
-                        say("There's no ladder.")
+                        say("There's no ladder that way.")
                     }
                 }
                 "down" -> {
@@ -164,7 +180,7 @@ fun mazeRoom(
                         z = z - 1
                         go(currentLevel[x][y][z][w]!!)
                     } else {
-                        say("There's no ladder.")
+                        say("There's no ladder that way.")
                     }
                 }
             }
@@ -198,6 +214,62 @@ fun mazeRoom(
                        ▼
                        
                     """.trimIndent())
+        }
+        action("push box (.*)") {(direction) ->
+            when (direction) {
+                "north" -> {
+                    if (x + 1 < currentLevel.size && currentLevel[x + 1][y][z][w] != null && doors.contains("north")
+                            && currentLevel[a][b][c][d] == currentLevel [x][y][z][w]
+                    ) {
+                        x = x + 1
+                        a = a + 1
+                        go(currentLevel[x][y][z][w]!!)
+                    } else if (doors.contains("north")&& currentLevel[a][b][c][d] == currentLevel [x][y][z][w]) {
+                        say("The door won't open.")
+                    } else {
+                        say("There's no door that way.")
+                    }
+                }
+                "south" -> {
+                    if (x - 1 >= 0 && currentLevel[x - 1][y][z][w] != null && doors.contains("south")
+                            && currentLevel[a][b][c][d] == currentLevel [x][y][z][w]
+                    ) {
+                        x = x - 1
+                        a = a - 1
+                        go(currentLevel[x][y][z][w]!!)
+                    } else if (doors.contains("south") && currentLevel[a][b][c][d] == currentLevel [x][y][z][w]) {
+                        say("The door won't open.")
+                    } else {
+                        say("There's no door that way.")
+                    }
+                }
+                "east" -> {
+                    if (y + 1 < currentLevel[x].size && currentLevel[x][y + 1][z][w] != null && doors.contains("east")
+                            && currentLevel[a][b][c][d] == currentLevel [x][y][z][w]
+                    ) {
+                        y = y + 1
+                        b = b + 1
+                        go(currentLevel[x][y][z][w]!!)
+                    } else if (doors.contains("east")&& currentLevel[a][b][c][d] == currentLevel [x][y][z][w]) {
+                        say("The door won't open.")
+                    } else {
+                        say("There's no door that way.")
+                    }
+                }
+                "west" -> {
+                    if (y - 1 >= 0 && currentLevel[x][y - 1][z][w] != null && doors.contains("west") &&
+                            currentLevel[a][b][c][d] == currentLevel [x][y][z][w]) {
+                        y = y - 1
+                        b = b - 1
+                        go(currentLevel[x][y][z][w]!!)
+                    }
+                    else if (doors.contains("west" )&& currentLevel[a][b][c][d] == currentLevel [x][y][z][w]) {
+                        say("The door won't open.")}
+                    else if (currentLevel[a][b][c][d] == currentLevel [x][y][z][w]){
+                        say("There's no door that way.")
+                    }
+                }
+            }
         }
         if (roomBlock != null) {
             roomBlock()

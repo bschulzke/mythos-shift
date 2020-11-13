@@ -30,6 +30,11 @@ var y = 1
 var z = 0
 var w = 0
 
+var a = 0
+var b = 1
+var c = 1
+var d = 1
+
 var currentLevel = level1
 
 var hasStarted1 = false
@@ -37,6 +42,7 @@ var hasStarted2 = false
 
 
 val main = game {
+
     //region level1 rooms
     level1[0][0][0][0] = mazeRoom(
             number = "0.0.0",
@@ -58,14 +64,14 @@ val main = game {
             ladderDirection = "up",
     )
 
-    level1[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"), ladderDirection = "")
+    level1[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"),)
     level1[0][1][1][0] = mazeRoom(number = "0.1.1", color = "red", doors = listOf("west"), ladderDirection = "down")
 
     level1[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("east"), ladderDirection = "up")
-    level1[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf(), ladderDirection = "")
+    level1[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf(),)
 
     level1[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("east"), ladderDirection = "down")
-    level1[0][1][1][1] = mazeRoom(number = "0.1.1", color = "blue", doors = listOf("west"), ladderDirection = "down")
+    level1[0][1][1][1] = mazeRoom(number = "0.1.1", color = "blue", doors = listOf("west"),)
     //endregion
 
     //region level2 rooms
@@ -97,7 +103,7 @@ val main = game {
             other = "You finished Level 2!"
     )
     level2[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north",),)
-    level2[1][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("south", "east"),)
+    level2[1][0][1][1] = mazeRoom(number = "1.0.1", color = "blue", doors = listOf("south", "east"),)
     //endregion
 
     initialRoom = level1[0][1][0][0]!!

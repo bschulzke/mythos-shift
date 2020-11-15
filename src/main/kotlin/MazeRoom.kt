@@ -28,52 +28,8 @@ fun mazeRoom(
             if (!hasStarted2 && hasStarted1 && currentLevel == level2) {
                 say("")
                 say("WELCOME TO LEVEL 2!")
-                say("Hint: The final room is marked marked 1.1.1 in blue.")
+                say("Hint: The final room is marked marked 0.1.1 in blue.")
                 hasStarted2 = true
-            }
-            if (!hasStarted1) {
-                say("Welcome to Shift! Please read these instructions carefully!")
-                say("In this game you will be presented with a series of mazes.")
-                say("The room you're currently in will always be shown by the most recent box, " +
-                        "which will look something like this:")
-                say("""
-                    ┌─────┐
-                    │     │
-                    └─────┘
-                    """.trimIndent())
-                say("Doors are represented by this symbol: ║ for east or west.")
-                say("And by this symbol: ═══ for north and south.")
-                say("Ladders, both up and down, are represented by this: #")
-                say("Refer to the text below the map to know whether a ladder goes up or down, " +
-                        "and any other info about the room.")
-                say("To navigate these mazes, you can type things like 'go north', or 'go east,' to move through doors, " +
-                        "if there's a door in that direction.")
-                say("If there's a ladder, you can also say 'go up' or 'go down.'")
-                say("")
-                say("Remember when you're looking at the screen, north is always up, south is down, east is right, and west is left.")
-                say("There's reminder text below each box that tells you which walls have doors, and provides additional info.")
-                say("But if you ever get confused about directions, you can say, 'show compass,' and this will appear on your screen:")
-                say("""
-                       ▲
-                       N
-                   ◄W    E►
-                       S
-                       ▼
-                       
-                    """.trimIndent())
-                say("In addition to moving in the three dimensions we're familiar with via ladders and doors, " +
-                        "you can also at any moment shift ana or kata.")
-                say("This is a special power you can do anywhere, as long as there's a room in that direction, " +
-                        "which you'll only find out by trying.")
-                say("Remember, ana and kata are directions along a third axis, so it's not up, down, north, south, east or west.")
-                say("They're two entirely different spacial directions.")
-                say("To move ana or kata, say, 'shift ana' or 'shift kata.'")
-                say("Your goal in every maze will always be to find the room with this symbol in the middle: *")
-                say("Good luck!")
-                say("")
-                say("WELCOME TO LEVEL 1!")
-                say("HINT: You're looking for the room with 0.0.0 marked in red.")
-                hasStarted1 = true
             }
             val top = when {
                 doors.contains("north") -> "┌─═══─┐"
@@ -143,6 +99,7 @@ fun mazeRoom(
                 say("$other")
             }
         }
+
         action("go to level two") {
             currentLevel = level2
             playerPosition.x = 0
@@ -206,7 +163,7 @@ fun mazeRoom(
                         say("There's no door that way.")
                     }
                 }
-                "up" -> {
+                "up", "up the ladder", "up ladder" -> {
                     if (
                             playerPosition.z!! + 1 < currentLevel[playerPosition.x!!][playerPosition.y!!].size &&
                             currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! + 1][playerPosition.w!!] != null &&
@@ -218,7 +175,7 @@ fun mazeRoom(
                         say("There's no ladder that way.")
                     }
                 }
-                "down" -> {
+                "down", "down the ladder", "down ladder" -> {
                     if (
                             playerPosition.z!! - 1 >= 0 &&
                             currentLevel[playerPosition.x!!][playerPosition.y!!][playerPosition.z!! - 1][playerPosition.w!!] != null &&

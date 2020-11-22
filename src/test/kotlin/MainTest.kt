@@ -6,6 +6,13 @@ class MainTest {
     @Test
     fun testLevel1() {
         assertFollows(main, branch {
+            player("")
+            player("")
+            player("")
+            player("")
+            player("")
+            player("")
+            player("")
             player("show compass")
             game("""
                        ▲

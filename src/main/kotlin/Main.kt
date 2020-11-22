@@ -10,12 +10,10 @@ data class Coordinates(
         var w: Int?,
 )
 
-var playerPosition = Coordinates (x = 0, y = 1, z = 0, w = 0)
+var player = Coordinates (x = 0, y = 1, z = 0, w = 0)
 
 var boxes = listOf<Coordinates>(
-        Coordinates(x = null, y = null, z = null, w = null),
-        Coordinates(x = null, y = null, z = null, w = null),
-        Coordinates(x = null, y = null, z = null, w = null),
+        Coordinates(x = 0, y = 0, z = 0, w = 0)
 )
 
 val level1 =
@@ -35,6 +33,17 @@ val level2 =
             Array(2) {
                 Array(2) {
                     Array<Room?>(2) {
+                        null
+                    }
+                }
+            }
+        }
+
+val level3 =
+        Array(2) {
+            Array(2) {
+                Array(2) {
+                    Array<Room?>(3) {
                         null
                     }
                 }
@@ -125,7 +134,7 @@ val main = game {
             say("WELCOME TO LEVEL 1!")
             say("HINT: You're looking for the room with 0.0.0 marked in red.")
             intro7 = true
-            go(level1[playerPosition.x!!][playerPosition.y!!][playerPosition.z!!][playerPosition.w!!]!!)
+            go(level1[player.x!!][player.y!!][player.z!!][player.w!!]!!)
         }
     }
 
@@ -151,7 +160,7 @@ val main = game {
     )
 
     level1[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"),)
-    level1[0][1][1][0] = mazeRoom(number = "0.1.1", color = "red", doors = listOf("west"), ladderDirection = "down")
+    level1[0][1][1][0] = mazeRoom(number = "0.1.1", color = "red", doors = listOf("west"), ladderDirection = "down", )
 
     level1[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf(), ladderDirection = "up")
     level1[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf(),)
@@ -187,7 +196,14 @@ val main = game {
             doors = listOf(),
             isFinish = true,
             other = "You finished Level 2!"
-    )
+    ) {
+        action("yes") {
+            currentLevel = level3
+            boxes = listOf(Coordinates(x = null, y = null, z = null, w = null),)
+            player = Coordinates (x = 0, y = 1, z = 1, w = 1)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+        }
+    }
     level2[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north",),)
     level2[1][0][1][1] = mazeRoom(number = "1.0.1", color = "blue", doors = listOf("south", "east"),)
     //endregion
@@ -199,6 +215,14 @@ val main = game {
             say("PRESS THE ENTER KEY NOW TO CONTINUE")
             hasStarted1 = true
         } }
+        action("go to level two"){
+            player.x = 0
+            player.y = 0
+            player.z = 0
+            player.w = 0
+            currentLevel = level2
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+        }
     }
     initialRoom = tutorial
 }

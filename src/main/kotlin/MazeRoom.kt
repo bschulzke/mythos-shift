@@ -18,7 +18,10 @@ fun mazeRoom(
         ladderDirection: String? = null,
         other: String? = null,
         isFinish: Boolean = false,
+
         hasPlate: Boolean = false,
+        plateColor: String? = null,
+
         lockedDoor: String? = null,
         link: Coordinates? = null,
 
@@ -131,7 +134,7 @@ fun mazeRoom(
                 say("There's a box on the pressure plate in this room.")
             }
             else if (hasPlate) {
-                say("There's a pressure plate in this room.")
+                say("There's a $plateColor pressure plate in this room.")
             }
             if (doorLock != null) {
                 say("$doorLock")

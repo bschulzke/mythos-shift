@@ -313,7 +313,7 @@ val main = game {
             player.z = 1
             player.w = 1
             currentLevel = level3
-            boxes = listOf(Coordinates(x = 1, y = 1, z = 1, w = 1), Coordinates(0, 1, 1, 2), Coordinates(0,0,0,2))
+            boxes = listOf(Coordinates(1, 1, 1, 1), Coordinates(0, 1, 1, 2), Coordinates(0,0,0,2))
             go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
         }
     }

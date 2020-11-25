@@ -8,7 +8,7 @@ fun lockCheck(
         platePlace: Coordinates?
 
 ): Boolean {
-    return hasLock == null || hasLock != direction || boxes.contains(platePlace)
+    return hasLock == null || !direction.contains(hasLock) || boxes.contains(platePlace)
 }
 
 fun mazeRoom(
@@ -28,37 +28,10 @@ fun mazeRoom(
         roomBlock: (RoomContext.() -> Unit)? = null
 ): Room {
     val doorLock = when {
-        lock !=
-                null &&
-                link != null &&
-                boxes.contains(link) &&
-                link.w == 0 &&
-                (lock == "up" || lock == "down") ->
-            "The ladder is locked with a trapdoor with a red light on it."
-        lock !=
-                null &&
-                link != null &&
-                boxes.contains(link) &&
-                link.w == 1 &&
-                (lock == "up" || lock == "down") ->
-            "The ladder is locked with a trapdoor with a blue light on it."
-        lock !=
-                null &&
-                link != null &&
-                boxes.contains(link) &&
-                link.w == 1 &&
-                (lock == "up" || lock == "down") ->
-            "The ladder is locked with a trapdoor with a green light on it."
-        lock !=
-                null &&
-                link != null &&
-                boxes.contains(link) &&
-                (lock == "up" || lock == "down") ->
-            "The light on the ladder's trapdoor has turned white."
-        boxes.contains(link) -> "The light above the $lock door has turned white."
-        !boxes.contains(link) && lock != null && link != null && link.w == 0 -> "There's a red light over the $lock door."
-        !boxes.contains(link) && lock != null && link != null && link.w == 1 -> "There's a blue light over the $lock door."
-        !boxes.contains(link) && lock != null && link != null && link.w == 2 -> "There's a green light over the $lock door."
+        lockCheck(hasLock = lock, direction = "$doors", platePlace = link) && lock != null -> "The light above the $lock door has turned white."
+        lock != null && link != null && !boxes.contains(link)  && link.w == 0 -> "There's a red light over the $lock door."
+        lock != null && link != null && !boxes.contains(link) && link.w == 1 -> "There's a blue light over the $lock door."
+        lock != null && link != null && !boxes.contains(link) && link.w == 2 -> "There's a green light over the $lock door."
         else -> null
     }
 

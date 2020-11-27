@@ -27,13 +27,6 @@ fun mazeRoom(
 
         roomBlock: (RoomContext.() -> Unit)? = null
 ): Room {
-    val doorLock = when {
-        lockCheck(hasLock = lock, direction = "$doors", platePlace = link) && lock != null -> "The light above the $lock door has turned white."
-        lock != null && link != null && !boxes.contains(link)  && link.w == 0 -> "There's a red light over the $lock door."
-        lock != null && link != null && !boxes.contains(link) && link.w == 1 -> "There's a blue light over the $lock door."
-        lock != null && link != null && !boxes.contains(link) && link.w == 2 -> "There's a green light over the $lock door."
-        else -> null
-    }
 
     val doors = when {
         doors.size == 0 -> "There aren't any doors"
@@ -48,6 +41,13 @@ fun mazeRoom(
 
     return room() {
         onEnter {
+            val doorLock = when {
+                lockCheck(hasLock = lock, direction = "$doors", platePlace = link) && lock != null -> "The light above the $lock door is white."
+                lock != null && link != null && !boxes.contains(link)  && link.w == 0 -> "There's a red light over the $lock door."
+                lock != null && link != null && !boxes.contains(link) && link.w == 1 -> "There's a blue light over the $lock door."
+                lock != null && link != null && !boxes.contains(link) && link.w == 2 -> "There's a green light over the $lock door."
+                else -> null
+            }
             if (!hasStarted2 && hasStarted1 && currentLevel == level2) {
                 say("")
                 say("WELCOME TO LEVEL 2!")

@@ -159,7 +159,7 @@ fun mazeRoom(
                 say("There's a box on the pressure plate in this room.")
             }
             else if (hasPlate) {
-                say("There's a $plateColor pressure plate in this room.")
+                say("There's a pressure plate with the letter $plateColor in this room.")
             }
             if (doorLock != null) {
                 say("$doorLock")
@@ -316,7 +316,8 @@ fun mazeRoom(
                             player.x!! + 1 < currentLevel.size &&
                             currentLevel[player.x!! + 1][player.y!!][player.z!!][player.w!!] != null &&
                             doors.contains("north") &&
-                            boxes.contains(player)
+                            boxes.contains(player) &&
+                            lockCheck(hasLock = lock, direction = direction, platePlace = link)
 
                     ) {
                         boxes.find {it == player}!!.x = player.x!! + 1
@@ -337,7 +338,8 @@ fun mazeRoom(
                             player.x!! - 1 >= 0 &&
                             currentLevel[player.x!! - 1][player.y!!][player.z!!][player.w!!] != null &&
                             doors.contains("south") &&
-                            boxes.contains(player)
+                            boxes.contains(player) &&
+                            lockCheck(hasLock = lock, direction = direction, platePlace = link)
 
                     ) {
                         boxes.find {it == player}!!.x = player.x!! - 1
@@ -358,7 +360,8 @@ fun mazeRoom(
                             player.y!! + 1 < currentLevel[player.x!!].size &&
                             currentLevel[player.x!!][player.y!! + 1][player.z!!][player.w!!] != null
                             && doors.contains("east") &&
-                            boxes.contains(player)
+                            boxes.contains(player) &&
+                            lockCheck(hasLock = lock, direction = direction, platePlace = link)
 
                     ) {
                         boxes.find {it == player}!!.y = player.y!! + 1
@@ -377,7 +380,8 @@ fun mazeRoom(
                             player.y!! - 1 >= 0 &&
                             currentLevel[player.x!!][player.y!! - 1][player.z!!][player.w!!] != null &&
                             doors.contains("west") &&
-                            boxes.contains(player)
+                            boxes.contains(player) &&
+                            lockCheck(hasLock = lock, direction = direction, platePlace = link)
 
                     ) {
                         boxes.find {it == player}!!.y = player.y!! - 1

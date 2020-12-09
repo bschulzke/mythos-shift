@@ -20,7 +20,8 @@ fun mazeRoom(
         isFinish: Boolean = false,
 
         hasPlate: Boolean = false,
-        plateColor: String? = null,
+        plateLetter: String? = null,
+        lockLetter: String? = null,
         lock: String? = null,
         link: Coordinates? = null,
 
@@ -40,33 +41,6 @@ fun mazeRoom(
 
     return room() {
         onEnter {
-            val doorLock = when {
-                lock != null && (lock.contains("up") || lock.contains("down"))
-                        && lockCheck(hasLock = lock, direction = "$doors", platePlace = link)
-                        && lock != null -> "The light next to the ladder is white."
-
-                lock != null && (lock.contains("up") || lock.contains("down")) &&
-                        lock != null &&
-                        link != null && !boxes.contains(link) &&
-                        link.w == 0 -> "There's a red light by the ladder."
-
-                lock != null && (lock.contains("up") || lock.contains("down")) &&
-                        lock != null &&
-                        link != null &&
-                        !boxes.contains(link)
-                        && link.w == 1 -> "There's a blue light by the ladder."
-                lock != null && (lock.contains("up") || lock.contains("down")) &&
-                        lock != null &&
-                        link != null &&
-                        !boxes.contains(link) &&
-                        link.w == 2 -> "There's a green light by the ladder."
-
-                lockCheck(hasLock = lock, direction = "$doors", platePlace = link) && lock != null -> "The light above the $lock door is white."
-                lock != null && link != null && !boxes.contains(link)  && link.w == 0 -> "There's a red light over the $lock door."
-                lock != null && link != null && !boxes.contains(link) && link.w == 1 -> "There's a blue light over the $lock door."
-                lock != null && link != null && !boxes.contains(link) && link.w == 2 -> "There's a green light over the $lock door."
-                else -> null
-            }
             if (!hasStarted2 && hasStarted1 && currentLevel == level2) {
                 say("")
                 say("WELCOME TO LEVEL 2!")
@@ -155,14 +129,17 @@ fun mazeRoom(
             if (other != null) {
                 say("$other")
             }
+            if (lock != null && (lock.contains("up") || lock.contains("down"))) {
+                say("There's $lockLetter by the ladder.")
+            }
+            else if (lock != null) {
+                say("There's $lockLetter by the $lock door.")
+            }
             if (hasPlate && boxes.contains(player)) {
-                say("There's a box on the pressure plate in this room.")
+                say("There's a box on the pressure plate in this room, which is marked with $plateLetter.")
             }
             else if (hasPlate) {
-                say("There's a pressure plate with the letter $plateColor in this room.")
-            }
-            if (doorLock != null) {
-                say("$doorLock")
+                say("There's a pressure plate with $plateLetter on it.")
             }
         }
 
@@ -244,7 +221,7 @@ fun mazeRoom(
                             ladderDirection != null && ladderDirection.contains("up")
                             )
                     {
-                        say("There's a trapdoor blocking this ladder.")
+                        say("There's a trapdoor with $lockLetter blocking this ladder.")
                     }
                     else {
                         say("There's no ladder that way.")
@@ -264,7 +241,7 @@ fun mazeRoom(
                             ladderDirection != null && ladderDirection.contains("down")
                     )
                     {
-                        say("There's a trapdoor blocking this ladder.")
+                        say("There's a trapdoor with $lockLetter blocking this ladder.")
                     }
                     else {
                         say("There's no ladder that way.")

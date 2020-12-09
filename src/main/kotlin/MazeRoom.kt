@@ -41,6 +41,35 @@ fun mazeRoom(
 
     return room() {
         onEnter {
+            val lockText = when {
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        link != null &&
+                        link.w == 0 -> "There's a red $lockLetter by the ladder."
+
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        link != null
+                        && link.w == 1 -> "There's a blue $lockLetter by the ladder."
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        link != null &&
+                        link.w == 2 -> "There's a green $lockLetter by the ladder."
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        link != null &&
+                        link.w == 3 -> "There's a yellow $lockLetter by the ladder."
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        link != null &&
+                        link.w == 4 -> "There's a orange $lockLetter by the ladder."
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        link != null &&
+                        link.w == 5 -> "There's a purple $lockLetter by the ladder."
+
+                lock != null && link != null && link.w == 0 -> "There's a red $lockLetter over the $lock door."
+                lock != null && link != null && link.w == 1 -> "There's a blue $lockLetter over the $lock door."
+                lock != null && link != null && link.w == 2 -> "There's a green $lockLetter over the $lock door."
+                lock != null && link != null && link.w == 3 -> "There's a yellow $lockLetter over the $lock door."
+                lock != null && link != null && link.w == 4 -> "There's a orange $lockLetter over the $lock door."
+                lock != null && link != null && link.w == 5 -> "There's a purple $lockLetter over the $lock door."
+                else -> null
+            }
             if (!hasStarted2 && hasStarted1 && currentLevel == level2) {
                 say("")
                 say("WELCOME TO LEVEL 2!")
@@ -52,6 +81,12 @@ fun mazeRoom(
                 say("WELCOME TO LEVEL 3!")
                 say("HINT: The final room is marked marked 1.0.0 in green.")
                 hasStarted3 = true
+            }
+            if (!hasStarted4 && currentLevel == level4) {
+                say("")
+                say("WELCOME TO LEVEL 4!")
+                say("HINT: The final room is marked marked 2.0 in green.")
+                hasStarted4 = true
             }
             val top = when {
                 doors.contains("north") -> "┌─═══─┐"
@@ -129,17 +164,14 @@ fun mazeRoom(
             if (other != null) {
                 say("$other")
             }
-            if (lock != null && (lock.contains("up") || lock.contains("down"))) {
-                say("There's $lockLetter by the ladder.")
-            }
-            else if (lock != null) {
-                say("There's $lockLetter by the $lock door.")
+            if (lockText != null) {
+                say("$lockText")
             }
             if (hasPlate && boxes.contains(player)) {
-                say("There's a box on the pressure plate in this room, which is marked with $plateLetter.")
+                say("There's a box on the pressure plate in this room, which is marked with a $plateLetter.")
             }
             else if (hasPlate) {
-                say("There's a pressure plate with $plateLetter on it.")
+                say("There's a pressure plate with a $plateLetter on it.")
             }
         }
 
@@ -187,7 +219,7 @@ fun mazeRoom(
                     {
                         player.y = player.y!! + 1
                         go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
-                    } else if (doors.contains("east") && lockCheck(hasLock = lock, direction = direction, platePlace = link)) {
+                    } else if (doors.contains("east")) {
                         say("The door won't open.")
                     } else {
                         say("There's no door that way.")

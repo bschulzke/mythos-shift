@@ -318,7 +318,7 @@ fun mazeRoom(
                        
                     """.trimIndent())
         }
-        action("push box (.*)") {(direction) ->
+        action("push box (.*)", "push it (.*)", "push the box (.*)") {(direction) ->
             when (direction) {
                 "north" -> {
                     if (

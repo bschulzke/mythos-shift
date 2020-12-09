@@ -332,7 +332,8 @@ val main = game {
             lock = "west",
             link = Coordinates(0, 1, 0, 2),
             hasPlate = true,
-            plateLetter = "yellow A"
+            plateLetter = "yellow A",
+            lockLetter = "B"
     )
     level4[1][2][0][0] = mazeRoom(number = "1.2", color = "red", doors = listOf("north", "south", "west"))
 
@@ -356,7 +357,10 @@ val main = game {
             color = "blue",
             doors = listOf("north"),
             hasPlate = true,
-            plateLetter = "yellow C"
+            plateLetter = "yellow C",
+            lock = "north",
+            lockLetter = "F",
+            link = Coordinates(2,2,0,2)
     )
 
     level4[1][0][0][1] = mazeRoom(
@@ -368,7 +372,14 @@ val main = game {
             lockLetter = "B"
     )
     level4[1][1][0][1] = mazeRoom(number = "1.1", color = "blue", doors = listOf("north", "south", "east"))
-    level4[1][2][0][1] = mazeRoom(number = "1.2", color = "blue", doors = listOf("north", "south", "west"))
+    level4[1][2][0][1] = mazeRoom(
+            number = "1.2",
+            color = "blue",
+            doors = listOf("north", "south", "west"),
+            lock = "south",
+            lockLetter = "F",
+            link = Coordinates(2,2,0,2)
+    )
 
     level4[2][0][0][1] = mazeRoom(number = "1.0", color = "blue", doors = listOf())
     level4[2][1][0][1] = mazeRoom(
@@ -376,7 +387,7 @@ val main = game {
             color = "blue",
             doors = listOf("south", "east"),
             hasPlate = true,
-            plateLetter = "yellow E"
+            plateLetter = "yellow E",
     )
     level4[2][2][0][1] = mazeRoom(number = "1.2", color = "blue", doors = listOf("south", "west"))
     //endregion
@@ -404,7 +415,13 @@ val main = game {
             other = "You finished Level 4! That's all for now, folks."
     )
     level4[2][1][0][2] = mazeRoom(number = "2.1", color = "green", doors = listOf("south", "east"))
-    level4[2][2][0][2] = mazeRoom(number = "2.2", color = "green", doors = listOf("south", "west"))
+    level4[2][2][0][2] = mazeRoom(
+            number = "2.2",
+            color = "green",
+            doors = listOf("south", "west"),
+            hasPlate = true,
+            plateLetter = "blue F"
+    )
     //endregion
 
     //region level4 yellow
@@ -460,8 +477,8 @@ val main = game {
             link = Coordinates(1, 1, 0, 0),
             lockLetter = "A"
     )
-    level4[2][1][0][3] = mazeRoom(number = "2.1", color = "yellow", doors = listOf("south", "east"))
-    level4[2][2][0][3] = mazeRoom(number = "2.2", color = "yellow", doors = listOf("south", "west"))
+    level4[2][1][0][3] = mazeRoom(number = "2.1", color = "yellow", doors = listOf("south",))
+    level4[2][2][0][3] = mazeRoom(number = "2.2", color = "yellow", doors = listOf("south",))
     //endregion
     //endregion
 
@@ -514,6 +531,7 @@ val main = game {
                        ▼
                        
                     """.trimIndent())
+                say("If you get stumped, you can try sketching a map of the maze an a piece of paper to help you keep track.")
                 intro4 = true
             }
             else if (!intro5) {

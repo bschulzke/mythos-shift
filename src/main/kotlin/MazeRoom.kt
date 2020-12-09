@@ -253,7 +253,7 @@ fun mazeRoom(
                             ladderDirection != null && ladderDirection.contains("up")
                             )
                     {
-                        say("There's a trapdoor with $lockLetter blocking this ladder.")
+                        say("There's a trapdoor blocking this ladder.")
                     }
                     else {
                         say("There's no ladder that way.")
@@ -273,7 +273,7 @@ fun mazeRoom(
                             ladderDirection != null && ladderDirection.contains("down")
                     )
                     {
-                        say("There's a trapdoor with $lockLetter blocking this ladder.")
+                        say("There's a trapdoor blocking this ladder.")
                     }
                     else {
                         say("There's no ladder that way.")

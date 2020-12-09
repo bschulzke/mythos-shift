@@ -21,7 +21,6 @@ fun mazeRoom(
 
         hasPlate: Boolean = false,
         plateColor: String? = null,
-
         lock: String? = null,
         link: Coordinates? = null,
 
@@ -42,6 +41,26 @@ fun mazeRoom(
     return room() {
         onEnter {
             val doorLock = when {
+                lock != null && (lock.contains("up") || lock.contains("down"))
+                        && lockCheck(hasLock = lock, direction = "$doors", platePlace = link)
+                        && lock != null -> "The light next to the ladder is white."
+
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        lock != null &&
+                        link != null && !boxes.contains(link) &&
+                        link.w == 0 -> "There's a red light by the ladder."
+
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        lock != null &&
+                        link != null &&
+                        !boxes.contains(link)
+                        && link.w == 1 -> "There's a blue light by the ladder."
+                lock != null && (lock.contains("up") || lock.contains("down")) &&
+                        lock != null &&
+                        link != null &&
+                        !boxes.contains(link) &&
+                        link.w == 2 -> "There's a green light by the ladder."
+
                 lockCheck(hasLock = lock, direction = "$doors", platePlace = link) && lock != null -> "The light above the $lock door is white."
                 lock != null && link != null && !boxes.contains(link)  && link.w == 0 -> "There's a red light over the $lock door."
                 lock != null && link != null && !boxes.contains(link) && link.w == 1 -> "There's a blue light over the $lock door."
@@ -222,8 +241,6 @@ fun mazeRoom(
                         go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
                     }
                     else if (
-                            player.z!! + 1 < currentLevel[player.x!!][player.y!!].size &&
-                            currentLevel[player.x!!][player.y!!][player.z!! + 1][player.w!!] != null &&
                             ladderDirection != null && ladderDirection.contains("up")
                             )
                     {
@@ -244,8 +261,6 @@ fun mazeRoom(
                         go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
                     }
                     else if (
-                            player.z!! + 1 < currentLevel[player.x!!][player.y!!].size &&
-                            currentLevel[player.x!!][player.y!!][player.z!! + 1][player.w!!] != null &&
                             ladderDirection != null && ladderDirection.contains("down")
                     )
                     {

@@ -15,6 +15,19 @@ var player = Coordinates (x = 0, y = 1, z = 0, w = 0)
 var boxes = listOf<Coordinates>(
 )
 
+//region room arrays
+val levelX =
+
+        Array(2) {
+            Array(2) {
+                Array(2) {
+                    Array<Room?>(2) {
+                        null
+                    }
+                }
+            }
+        }
+
 val level1 =
 
         Array(1) {
@@ -48,6 +61,7 @@ val level3 =
                 }
             }
         }
+//endregion
 
 var currentLevel = level1
 
@@ -66,9 +80,25 @@ var intro7 = false
 
 val main = game {
 
-    //region intro text
+    levelX[0][0][0][0] = mazeRoom(number = "0.0.0", color = "red", doors = listOf("north", "east"), ladderDirection = "up")
+    levelX[0][1][0][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf("north", "west"), ladderDirection = "up")
+    levelX[1][0][0][0] = mazeRoom(number = "1.0.0", color = "red", doors = listOf("south", "east"), ladderDirection = "up")
+    levelX[1][1][0][0] = mazeRoom(number = "1.1.0", color = "red", doors = listOf("south", "west"), ladderDirection = "up")
 
-    //endregion
+    levelX[0][0][1][0] = mazeRoom(number = "0.0.0", color = "red", doors = listOf("north", "east"), ladderDirection = "down")
+    levelX[0][1][1][0] = mazeRoom(number = "0.1.0", color = "red", doors = listOf("north", "west"), ladderDirection = "down")
+    levelX[1][0][1][0] = mazeRoom(number = "1.0.0", color = "red", doors = listOf("south", "east"), ladderDirection = "down")
+    levelX[1][1][1][0] = mazeRoom(number = "1.1.0", color = "red", doors = listOf("south", "west"), ladderDirection = "down")
+
+    levelX[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("north", "east"), ladderDirection = "up")
+    levelX[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("north", "west"), ladderDirection = "up")
+    levelX[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south", "east"), ladderDirection = "up")
+    levelX[1][1][0][1] = mazeRoom(number = "1.1.0", color = "blue", doors = listOf("south", "west"), ladderDirection = "up")
+
+    levelX[0][0][1][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("north", "east"), ladderDirection = "down")
+    levelX[0][1][1][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("north", "west"), ladderDirection = "down")
+    levelX[1][0][1][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south", "east"), ladderDirection = "down")
+    levelX[1][1][1][1] = mazeRoom(number = "1.1.0", color = "blue", doors = listOf("south", "west"), ladderDirection = "down")
 
     //region level1 rooms
     level1[0][0][0][0] = mazeRoom(
@@ -232,6 +262,7 @@ val main = game {
     //endregion
     //endregion
 
+    //region game controls
     val tutorial = room() {
         onEnter { if (!hasStarted1) {
             say("Welcome to Shift! Please read these instructions carefully!")
@@ -289,6 +320,7 @@ val main = game {
                         "you won't go up, down, north, south, east or west. You'll go ana, or kata.")
                 say("They're two entirely different spacial directions.")
                 say("Once you begin playing, you'll see how this works.")
+                say("PRESS ENTER NOW TO CONTINUE")
                 intro5 = true
             }
             else if (!intro6) {
@@ -323,7 +355,16 @@ val main = game {
             boxes = listOf(Coordinates(1, 1, 1, 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,0))
             go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
         }
+        action ("go to test") {
+            player.x = 0
+            player.y = 0
+            player.z = 0
+            player.w = 0
+            currentLevel = levelX
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+        }
     }
+    //endregion
     initialRoom = tutorial
 }
 

@@ -73,6 +73,16 @@ val level4 =
             }
         }
 
+val level5 =
+        Array(3) {
+            Array(3) {
+                Array(3) {
+                    Array<Room?>(5) {
+                        null
+                    }
+                }
+            }
+        }
 //endregion
 
 var currentLevel = level1
@@ -104,7 +114,6 @@ val main = game {
     levelX[1][0][1][0] = mazeRoom(number = "1.0.0", color = "red", doors = listOf("south", "east"), ladderDirection = "down")
     levelX[1][1][1][0] = mazeRoom(number = "1.1.0", color = "red", doors = listOf("south", "west"), ladderDirection = "down")
 
-    levelX[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("north", "east"), ladderDirection = "up")
     levelX[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("north", "west"), ladderDirection = "up")
     levelX[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf("south", "east"), ladderDirection = "up")
     levelX[1][1][0][1] = mazeRoom(number = "1.1.0", color = "blue", doors = listOf("south", "west"), ladderDirection = "up")
@@ -297,7 +306,7 @@ val main = game {
     //endregion
     //endregion
 
-    //region level3 rooms
+    //region level4 rooms
     //region level4 red
     level4[0][0][0][0] = mazeRoom(
             number = "0.0",
@@ -481,6 +490,7 @@ val main = game {
     level4[2][2][0][3] = mazeRoom(number = "2.2", color = "yellow", doors = listOf("south",))
     //endregion
     //endregion
+
 
 
     //region tutorial

@@ -91,6 +91,7 @@ var hasStarted1 = false
 var hasStarted2 = false
 var hasStarted3 = false
 var hasStarted4 = false
+var hasStarted5 = false
 
 var intro1 = false
 var intro2 = false
@@ -522,7 +523,7 @@ val main = game {
             color = "red",
             doors = listOf("east"),
             lock = "east",
-            link = Coordinates(2, 0, 2, 4),
+            link = Coordinates(2, 0, 1, 4),
             lockLetter = "B"
     )
     level5[2][2][1][0] = mazeRoom(
@@ -551,6 +552,7 @@ val main = game {
             color = "red",
             doors = listOf("south", "west"),
             lock = "west",
+            lockLetter = "C",
             link = Coordinates(0, 0, 2, 4),
     )
     //endregion
@@ -592,11 +594,11 @@ val main = game {
 
     level5[1][0][2][1] = mazeRoom(number = "1.0.2", color = "blue", doors = listOf("south", "east"),)
     level5[1][1][2][1] = mazeRoom(number = "1.1.2", color = "blue", doors = listOf("north", "south", "west"),)
-    level4[1][2][2][1] = mazeRoom(number = "1.2.2", color = "blue", doors = listOf("north"),)
+    level5[1][2][2][1] = mazeRoom(number = "1.2.2", color = "blue", doors = listOf("north"),)
 
-    level5[2][0][2][1] = mazeRoom(number = ".2", color = "blue", doors = listOf(), ladderDirection = "down")
-    level5[2][1][2][1] = mazeRoom(number = ".2", color = "blue", doors = listOf("south"),)
-    level5[2][2][2][1] = mazeRoom(number = ".2", color = "blue", doors = listOf("south"),)
+    level5[2][0][2][1] = mazeRoom(number = "2.0.2", color = "blue", doors = listOf(), ladderDirection = "down")
+    level5[2][1][2][1] = mazeRoom(number = "2.1.2", color = "blue", doors = listOf("south"),)
+    level5[2][2][2][1] = mazeRoom(number = "2.2.2", color = "blue", doors = listOf("south"),)
     //endregion
     //endregion
 
@@ -633,7 +635,7 @@ val main = game {
             doors = listOf("north", "south"),
             lock = "north",
             lockLetter = "B",
-            link = Coordinates(2,1,1,0),
+            link = Coordinates(2,0,1,4),
     )
 
     level5[2][1][1][2] = mazeRoom(number = "2.1.1", color = "green", doors = listOf("south"),)
@@ -719,14 +721,20 @@ val main = game {
     //endregion
 
     //region level5 orange 2nd
-    level5[0][0][1][4] = mazeRoom(number = ".1", color = "orange", doors = listOf("north", "east"),)
-    level5[0][1][1][4] = mazeRoom(number = ".1", color = "orange", doors = listOf("west"),)
-    level5[0][2][1][4] = mazeRoom(number = ".1", color = "orange", doors = listOf(), ladderDirection = "up down")
+    level5[0][0][1][4] = mazeRoom(number = "0.0.1", color = "orange", doors = listOf("north", "east"),)
+    level5[0][1][1][4] = mazeRoom(number = "0.1.1", color = "orange", doors = listOf("west"),)
+    level5[0][2][1][4] = mazeRoom(number = "0.2.1", color = "orange", doors = listOf(), ladderDirection = "up down")
 
-    level5[1][0][1][4] = mazeRoom(number = ".1", color = "orange", doors = listOf("north", "south"),)
+    level5[1][0][1][4] = mazeRoom(number = "1.0.1", color = "orange", doors = listOf("north", "south"),)
 
-    level5[2][0][1][4] = mazeRoom(number = ".1", color = "orange", doors = listOf("south", "east"),)
-    level5[2][1][1][4] = mazeRoom(number = ".1", color = "orange", doors = listOf("west"),)
+    level5[2][0][1][4] = mazeRoom(
+            number = "2.0.1",
+            color = "orange",
+            doors = listOf("south", "east"),
+            hasPlate = true,
+            plateLetter = "B"
+    )
+    level5[2][1][1][4] = mazeRoom(number = "2.1.1", color = "orange", doors = listOf("west"),)
     //endregion
 
     //region level5 orange 3rd
@@ -750,7 +758,7 @@ val main = game {
     )
     level5[0][2][2][4] = mazeRoom(number = "0.2.2", color = "orange", doors = listOf("north", "west"), ladderDirection = "down")
 
-    level5[1][0][2][4] = mazeRoom(number = "1.0.2", color = "orange", doors = listOf("east"),)
+    level5[1][0][2][4] = mazeRoom(number = "1.0.2", color = "orange", doors = listOf("east", "north"),)
     level5[1][1][2][4] = mazeRoom(number = "1.1.2", color = "orange", doors = listOf("east", "west", "south"),)
     level5[1][2][2][4] = mazeRoom(number = "1.2.2", color = "orange", doors = listOf("west"),)
 
@@ -873,6 +881,20 @@ val main = game {
                     Coordinates(1, 1, 0, 1),
                     Coordinates(2,2,0,2),
                     Coordinates(1, 2, 0, 3)
+            )
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+        }
+        action ("go to level five") {
+            player.x = 0
+            player.y = 1
+            player.z = 0
+            player.w = 3
+            currentLevel = level5
+            boxes = listOf(
+                    Coordinates(2, 1, 1, 0),
+                    Coordinates(2, 1, 2, 3),
+                    Coordinates(2,0,2,4),
+                    Coordinates(0, 1, 1, 4)
             )
             go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
         }

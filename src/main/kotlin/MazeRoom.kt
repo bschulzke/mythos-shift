@@ -34,6 +34,7 @@ fun mazeRoom(
         else -> "There are doors to the ${doors.slice(0..(doors.size - 2)).joinToString(", ")} and ${doors.last()}"
     }
     val ladder = when {
+        ladderDirection == "up down" -> " There's a ladder going up and down."
         ladderDirection == "up" -> " There's a ladder going up."
         ladderDirection == "down" -> " There's a ladder going down."
         else -> ""
@@ -88,6 +89,12 @@ fun mazeRoom(
                 say("HINT: The final room is marked marked 2.0 in green.")
                 hasStarted4 = true
             }
+            if (!hasStarted5 && currentLevel == level5) {
+                say("")
+                say("WELCOME TO LEVEL 5!")
+                say("HINT: Working on hints")
+                hasStarted5 = true
+            }
             val top = when {
                 doors.contains("north") -> "┌─═══─┐"
                 else -> "┌─────┐"
@@ -140,13 +147,11 @@ fun mazeRoom(
             ) {
                 middle += "  ▆  │"
             }
-            else if (doors.contains("east") && ladder.contains("up")) {
+            else if (doors.contains("east") && ladderDirection != null) {
                 middle += "  #  ║"
-            } else if (doors.contains("east") && ladder.contains("down")) {
-                middle += "  #  ║"
-            } else if (doors.contains("east")) {
+            }  else if (doors.contains("east")) {
                 middle += "     ║"
-            } else if (ladder.contains("up") || ladder.contains("down")) {
+            } else if (ladderDirection != null) {
                 middle += "  #  │"
             } else {
                 middle += "     │"

@@ -92,7 +92,7 @@ fun mazeRoom(
             if (!hasStarted5 && currentLevel == level5) {
                 say("")
                 say("WELCOME TO LEVEL 5!")
-                say("HINT: Working on hints")
+                say("HINT: Your first CHECKPOINT in Level 5 is the room marked 2.2.0 in yellow.")
                 hasStarted5 = true
             }
             val top = when {

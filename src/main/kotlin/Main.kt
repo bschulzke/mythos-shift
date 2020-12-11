@@ -101,6 +101,9 @@ var intro5 = false
 var intro6 = false
 var intro7 = false
 
+var five1 = false
+var five2 = false
+var five3 = false
 
 val main = game {
 
@@ -422,8 +425,22 @@ val main = game {
             color = "green",
             doors = listOf(),
             isFinish = true,
-            other = "You finished Level 4! That's all for now, folks."
-    )
+            other = "You finished Level 4! If you'd like to go on to Level 5, say, 'yes.'") {
+        action("yes", "yes.", "Yes", "Yes.") {
+            player.x = 0
+            player.y = 1
+            player.z = 0
+            player.w = 3
+            currentLevel = level5
+            boxes = listOf(
+                    Coordinates(2, 1, 1, 0),
+                    Coordinates(2, 1, 2, 3),
+                    Coordinates(2,0,2,4),
+                    Coordinates(0, 1, 1, 4)
+            )
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+        }
+    }
     level4[2][1][0][2] = mazeRoom(number = "2.1", color = "green", doors = listOf("south", "east"))
     level4[2][2][0][2] = mazeRoom(
             number = "2.2",
@@ -569,7 +586,13 @@ val main = game {
     //endregion
 
     //region level5 blue 2nd
-    level5[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf(), ladderDirection = "up")
+    level5[0][0][1][1] = mazeRoom(
+            number = "0.0.1",
+            color = "blue",
+            doors = listOf(),
+            ladderDirection = "up",
+            other = "You've reached the second CHECKPOINT! The next checkpoint is marked 0.2.2 in orange."
+    )
     level5[0][1][1][1] = mazeRoom(number = "0.1.1", color = "blue", doors = listOf("north", "east"),)
     level5[0][2][1][1] = mazeRoom(number = "0.2.1", color = "blue", doors = listOf("west"),)
 
@@ -677,7 +700,13 @@ val main = game {
     level5[1][2][0][3] = mazeRoom(number = "1.2.0", color = "yellow", doors = listOf("south"),)
 
     level5[2][1][0][3] = mazeRoom(number = "2.1.0", color = "yellow", doors = listOf(),)
-    level5[2][2][0][3] = mazeRoom(number = "2.2.0", color = "yellow", doors = listOf(), ladderDirection = "up")
+    level5[2][2][0][3] = mazeRoom(
+            number = "2.2.0",
+            color = "yellow",
+            doors = listOf(),
+            ladderDirection = "up",
+            other = "You've reached the first CHECKPOINT! Your next CHECKPOINT is the room marked 0.0.1 in blue."
+    )
     //endregion
 
     //region level5 yellow 2nd
@@ -756,7 +785,13 @@ val main = game {
             lockLetter = "D",
             link = Coordinates(2,2,2,3)
     )
-    level5[0][2][2][4] = mazeRoom(number = "0.2.2", color = "orange", doors = listOf("north", "west"), ladderDirection = "down")
+    level5[0][2][2][4] = mazeRoom(
+            number = "0.2.2",
+            color = "orange",
+            doors = listOf("north", "west"),
+            ladderDirection = "down",
+            other = "You've reached the third CHECKPOINT! The FINAL room in Level 5 is marked 2.0.1 in red."
+    )
 
     level5[1][0][2][4] = mazeRoom(number = "1.0.2", color = "orange", doors = listOf("east", "north"),)
     level5[1][1][2][4] = mazeRoom(number = "1.1.2", color = "orange", doors = listOf("east", "west", "south"),)
@@ -816,14 +851,15 @@ val main = game {
                        ▼
                        
                     """.trimIndent())
-                say("If you get stumped, you can try sketching a map of the maze an a piece of paper to help you keep track.")
+                say("If you get stumped, you can try sketching a map of the maze on a piece of paper " +
+                        "to help you keep track of where you've been before.")
                 intro4 = true
             }
             else if (!intro5) {
                 say("In addition to moving in the three dimensions we're familiar with via ladders and doors, " +
-                        "you cAlso shift ana or kata, which are 4D directions.")
+                        "you can also shift (meaning move) ana or kata, which are directions in the FOURTH DIMENSION.")
                 say("This is a special power you can do ANYWHERE, ANYTIME.")
-                say("Remember, ana and kata are directions along a FOURTH axis, so you when you shift ana or shift kata, " +
+                say("Remember, ana and kata are directions along a FOURTH axis, so you when you shift (meaning move) ana or shift kata, " +
                         "you won't go up, down, north, south, east or west. You'll go ana, or kata.")
                 say("They're two entirely different spacial directions.")
                 say("Once you begin playing, you'll see how this works.")
@@ -831,9 +867,9 @@ val main = game {
                 intro5 = true
             }
             else if (!intro6) {
-                say("To shift ana or kata, just type the words, 'shift ana' or 'shift kata' and press enter.")
-                say("Remember, that DOES NOT mean using the SHIFT key on your computer.")
-                say("Just type in the word shift, all in lower case, followed by the word 'ana' or 'kata.'")
+                say("To shift ana or kata, just type these two words: 'shift ana' or 'shift kata' and press ENTER.")
+                say("That DOES NOT mean pressing the SHIFT key on your computer.")
+                say("Just type in the word 'shift', all lower case, followed by the word 'ana' or 'kata' and then press ENTER.")
                 say("If you get stuck, try re-reading these instructions.")
                 say("TO BEGIN LEVEL 1, PRESS THE ENTER KEY NOW")
                 intro6 = true

@@ -1,11 +1,11 @@
 import dev.mythos.test.assertFollows
 import dev.mythos.test.branch
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 
 class MainTest {
     @Test
     fun testLevel1() {
-        assertFollows(main, branch {
+        assertFollows(mainGame, branch {
             player("")
             player("")
             player("")
@@ -46,7 +46,7 @@ class MainTest {
     }
     @Test
     fun testLevel2() {
-        assertFollows(main, branch {
+        assertFollows(mainGame, branch {
             player("go to level two")
             game(Regex(".*0\\.0\\.0.*red.*"))
             player("go east")
@@ -81,15 +81,15 @@ class MainTest {
             game(Regex(".*You finished Level 2!.*"))
         })
     }
-    @Test
-    fun testLevel3() {
-        assertFollows(main, branch {
-            player("go to level three")
-            game(Regex(".*0\\.1\\.1.*blue.*"))
-            player("go north")
-            game(Regex(".*1\\.1\\.1.*blue.*"))
-            player("push box south")
-            game(Regex(".*0\\.1\\.1.*blue.*"))
-        })
-    }
+//    @Test
+//    fun testLevel3() {
+//        assertFollows(mainGame, branch {
+//            player("go to level three")
+//            game(Regex(".*0\\.1\\.1.*blue.*"))
+//            player("go north")
+//            game(Regex(".*1\\.1\\.1.*blue.*"))
+//            player("push box south")
+//            game(Regex(".*0\\.1\\.1.*blue.*"))
+//        })
+//    }
 }

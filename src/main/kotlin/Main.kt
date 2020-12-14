@@ -2,6 +2,7 @@ import dev.mythos.dsl.Room
 import dev.mythos.dsl.game
 import dev.mythos.dsl.room
 import dev.mythos.game.runGame
+import kotlin.browser.window
 
 data class Coordinates(
         var x: Int?,
@@ -105,7 +106,7 @@ var five1 = false
 var five2 = false
 var five3 = false
 
-val main = game {
+val mainGame = game {
 
     //region test rooms
     levelX[0][0][0][0] = mazeRoom(number = "0.0.0", color = "red", doors = listOf("north", "east"), ladderDirection = "up")
@@ -940,5 +941,5 @@ val main = game {
 }
 
 fun main() {
-    runGame(main)
+    window.onload = { runGame(mainGame) }
 }

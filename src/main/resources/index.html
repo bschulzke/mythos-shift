@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mythos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+        }
+
+        #mythos {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #mythos-output p {
+            padding-bottom: 1rem;
+            line-height: 1.5em;
+            margin: 0;
+            white-space: pre;
+            font-family: monospace;
+        }
+
+        #mythos-output .player {
+            font-style: italic;
+        }
+
+        #mythos-output .past {
+            color: #bbb;
+        }
+
+        #mythos-output .filler {
+            flex: 1;
+        }
+
+        #mythos-output {
+            display: flex;
+            flex-direction: column;
+            height: 20rem;
+            width: 100%;
+            overflow-y: scroll;
+            border: 1px solid black;
+            flex: 1;
+        }
+
+        #mythos-input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="mythos">
+    <div id="mythos-output">
+        <div class="filler"></div>
+    </div>
+    <input id="mythos-input" placeholder="Say something..."/>
+</div>
+<script src="mythos-shift.js"></script>
+</body>
+</html>

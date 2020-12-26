@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Mythos</title>
     <style>
+        @font-face {
+            font-family: "Monospace Regular";
+            src: url("/fonts/MonospaceRegular-6ZWg.ttf") format("ttf"),
+                 url("/fonts/MonospaceRegular-6ZWg.woff") format("woff");
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -25,7 +31,8 @@
             line-height: 1.5em;
             margin: 0;
             white-space: pre;
-            font-family: monospace;
+            font-weight: bold;
+            font-family: "Monospace Regular", monospace;
         }
 
         #mythos-output .player {

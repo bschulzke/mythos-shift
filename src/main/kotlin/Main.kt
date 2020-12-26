@@ -1,14 +1,13 @@
-import dev.mythos.dsl.Room
 import dev.mythos.dsl.game
 import dev.mythos.dsl.room
 import dev.mythos.game.runGame
 import kotlin.browser.window
 
 data class Coordinates(
-        var x: Int?,
-        var y: Int?,
-        var z: Int?,
-        var w: Int?,
+        var x: Int,
+        var y: Int,
+        var z: Int,
+        var w: Int,
 )
 
 var player = Coordinates (x = 0, y = 1, z = 0, w = 0)
@@ -22,7 +21,7 @@ val levelX =
         Array(2) {
             Array(2) {
                 Array(2) {
-                    Array<Room?>(2) {
+                    Array<MazeRoom?>(2) {
                         null
                     }
                 }
@@ -34,7 +33,7 @@ val level1 =
         Array(1) {
             Array(2) {
                 Array(2) {
-                    Array<Room?>(2) {
+                    Array<MazeRoom?>(2) {
                         null
                     }
                 }
@@ -45,7 +44,7 @@ val level2 =
         Array(2) {
             Array(2) {
                 Array(2) {
-                    Array<Room?>(2) {
+                    Array<MazeRoom?>(2) {
                         null
                     }
                 }
@@ -56,7 +55,7 @@ val level3 =
         Array(2) {
             Array(2) {
                 Array(2) {
-                    Array<Room?>(3) {
+                    Array<MazeRoom?>(3) {
                         null
                     }
                 }
@@ -67,7 +66,7 @@ val level4 =
         Array(3) {
             Array(3) {
                 Array(1) {
-                    Array<Room?>(4) {
+                    Array<MazeRoom?>(4) {
                         null
                     }
                 }
@@ -78,7 +77,7 @@ val level5 =
         Array(3) {
             Array(3) {
                 Array(3) {
-                    Array<Room?>(5) {
+                    Array<MazeRoom?>(5) {
                         null
                     }
                 }
@@ -140,7 +139,7 @@ val mainGame = game {
     ) {
         action("yes") {
             currentLevel = level2
-            go(level2[0][0][0][0]!!)
+            go(level2[0][0][0][0]!!.room)
         }
     }
     level1[0][1][0][0] = mazeRoom(
@@ -191,7 +190,7 @@ val mainGame = game {
         action("yes") {
             currentLevel = level3
             boxes = listOf(Coordinates(x = 1, y = 1, z = 1, w = 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,0))
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
     }
     level2[0][0][1][1] = mazeRoom(number = "0.0.1", color = "blue", doors = listOf("north",),)
@@ -283,7 +282,7 @@ val mainGame = game {
                     Coordinates(2,2,0,2),
                     Coordinates(1, 2, 0, 3)
             )
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
     }
     level3[1][1][0][2] = mazeRoom(number = "1.1.0", color = "green", doors = listOf(),)
@@ -439,7 +438,7 @@ val mainGame = game {
                     Coordinates(2,0,2,4),
                     Coordinates(0, 1, 1, 4)
             )
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
     }
     level4[2][1][0][2] = mazeRoom(number = "2.1", color = "green", doors = listOf("south", "east"))
@@ -879,7 +878,7 @@ val mainGame = game {
                 say("WELCOME TO LEVEL 1!")
                 say("HINT: You're looking for the room with 0.0.0 marked in red.")
                 intro7 = true
-                go(level1[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+                go(level1[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
             }
         }
         action("go to level two"){
@@ -888,7 +887,7 @@ val mainGame = game {
             player.z = 0
             player.w = 0
             currentLevel = level2
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
         action("go to level three") {
             player.x = 0
@@ -897,7 +896,7 @@ val mainGame = game {
             player.w = 1
             currentLevel = level3
             boxes = listOf(Coordinates(1, 1, 1, 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,0))
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
         action ("go to test") {
             player.x = 0
@@ -905,7 +904,7 @@ val mainGame = game {
             player.z = 0
             player.w = 0
             currentLevel = levelX
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
         action ("go to level four") {
             player.x = 1
@@ -919,7 +918,7 @@ val mainGame = game {
                     Coordinates(2,2,0,2),
                     Coordinates(1, 2, 0, 3)
             )
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
         action ("go to level five") {
             player.x = 0
@@ -933,7 +932,7 @@ val mainGame = game {
                     Coordinates(2,0,2,4),
                     Coordinates(0, 1, 1, 4)
             )
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!)
+            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
     }
     //endregion

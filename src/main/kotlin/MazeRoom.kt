@@ -45,19 +45,19 @@ fun mazeRoom(
         roomBlock: (RoomContext.() -> Unit)? = null
 ): MazeRoom {
 
-    val doorText = when {
-        doors.size == 0 -> "There aren't any doors"
-        doors.size == 1 -> "There's a door to the ${doors[0]}"
+    val doorText = when (doors.size) {
+        0 -> "There aren't any doors"
+        1 -> "There's a door to the ${doors[0]}"
         else -> "There are doors to the ${doors.slice(0..(doors.size - 2)).joinToString(", ")} and ${doors.last()}"
     }
-    val ladder = when {
-        ladderDirection == "up down" -> " There's a ladder going up and down."
-        ladderDirection == "up" -> " There's a ladder going up."
-        ladderDirection == "down" -> " There's a ladder going down."
+    val ladder = when (ladderDirection) {
+        "up down" -> " There's a ladder going up and down."
+        "up" -> " There's a ladder going up."
+        "down" -> " There's a ladder going down."
         else -> ""
     }
 
-    val room = room() {
+    val room = room {
         onEnter {
             val lockText = when {
                 lock != null && (lock.contains("up") || lock.contains("down")) &&
@@ -203,17 +203,17 @@ fun mazeRoom(
             player.y = 0
             player.z = 0
             player.w = 0
-            go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
+            go(currentLevel[player.x][player.y][player.z][player.w]!!.room)
         }
         action("go (.*)") { (direction) ->
             when (direction) {
                 "north" -> {
                     if (
-                            player.x!! + 1 < currentLevel.size &&
-                            currentLevel[player.x!! + 1][player.y!!][player.z!!][player.w!!] != null &&
+                            player.x + 1 < currentLevel.size &&
+                            currentLevel[player.x + 1][player.y][player.z][player.w] != null &&
                             doorText.contains("north") && lockCheck(hasLock = lock, direction = direction, platePlace = link))
-                    { player.x = player.x!! + 1
-                        go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
+                    { player.x = player.x + 1
+                        go(currentLevel[player.x][player.y][player.z][player.w]!!.room)
                     } else if (doorText.contains("north")) {
                         say("The door won't open.")
                     } else {
@@ -222,11 +222,11 @@ fun mazeRoom(
                 }
                 "south" -> {
                     if (
-                            player.x!! - 1 >= 0 &&
-                            currentLevel[player.x!! - 1][player.y!!][player.z!!][player.w!!] != null
+                            player.x - 1 >= 0 &&
+                            currentLevel[player.x - 1][player.y][player.z][player.w] != null
                             && doorText.contains("south") && lockCheck(hasLock = lock, direction = direction, platePlace = link)) {
-                        player.x = player.x!! - 1
-                        go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
+                        player.x = player.x - 1
+                        go(currentLevel[player.x][player.y][player.z][player.w]!!.room)
                     } else if (doorText.contains("south")) {
                         say("The door won't open.")
                     } else {
@@ -235,12 +235,12 @@ fun mazeRoom(
                 }
                 "east" -> {
                     if (
-                            player.y!! + 1 < currentLevel[player.x!!].size &&
-                            currentLevel[player.x!!][player.y!! + 1][player.z!!][player.w!!] != null &&
+                            player.y + 1 < currentLevel[player.x].size &&
+                            currentLevel[player.x][player.y + 1][player.z][player.w] != null &&
                             doorText.contains("east") && lockCheck(hasLock = lock, direction = direction, platePlace = link))
                     {
-                        player.y = player.y!! + 1
-                        go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
+                        player.y = player.y + 1
+                        go(currentLevel[player.x][player.y][player.z][player.w]!!.room)
                     } else if (doorText.contains("east")) {
                         say("The door won't open.")
                     } else {
@@ -351,9 +351,9 @@ fun mazeRoom(
                             lockCheck(hasLock = lock, direction = direction, platePlace = link)
 
                     ) {
-                        boxes.find {it == player}!!.x = player.x!! + 1
-                        player.x = player.x!! + 1
-                        go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
+                        boxes.find {it == player}!!.x = player.x + 1
+                        player.x = player.x + 1
+                        go(currentLevel[player.x][player.y][player.z][player.w]!!.room)
                     }
                     else if (doorText.contains("north") &&
                             boxes.contains(player)
@@ -366,8 +366,8 @@ fun mazeRoom(
                 }
                 "south" -> {
                     if (
-                            player.x!! - 1 >= 0 &&
-                            currentLevel[player.x!! - 1][player.y!!][player.z!!][player.w!!] != null &&
+                            player.x - 1 >= 0 &&
+                            currentLevel[player.x - 1][player.y][player.z][player.w] != null &&
                             doorText.contains("south") &&
                             boxes.contains(player) &&
                             lockCheck(hasLock = lock, direction = direction, platePlace = link)

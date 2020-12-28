@@ -18,8 +18,13 @@ data class MazeRoom(
         val link: Coordinates?,
         val room: Room,
 ) {
-    fun lockCheck(direction: String): Boolean {
-        return lock == null || !direction.contains(lock) || boxes.contains(link)
+    fun lockCheck(
+            hasLock: String?,
+            direction: String,
+            platePlace: Coordinates?
+
+    ): Boolean {
+        return hasLock == null || !direction.contains(hasLock) || boxes.contains(platePlace)
     }
 }
 
@@ -339,8 +344,8 @@ fun mazeRoom(
             when (direction) {
                 "north" -> {
                     if (
-                            player.x!! + 1 < currentLevel.size &&
-                            currentLevel[player.x!! + 1][player.y!!][player.z!!][player.w!!] != null &&
+                            player.x + 1 < currentLevel.size &&
+                            currentLevel[player.x + 1][player.y][player.z][player.w] != null &&
                             doorText.contains("north") &&
                             boxes.contains(player) &&
                             lockCheck(hasLock = lock, direction = direction, platePlace = link)

@@ -394,15 +394,15 @@ val mainGame = game {
             link = Coordinates(2,2,0,2)
     )
 
-    level4[2][0][0][1] = mazeRoom(number = "1.0", color = "blue", doors = listOf())
+    level4[2][0][0][1] = mazeRoom(number = "2.0", color = "blue", doors = listOf())
     level4[2][1][0][1] = mazeRoom(
-            number = "1.1",
+            number = "2.1",
             color = "blue",
             doors = listOf("south", "east"),
             hasPlate = true,
             plateLetter = "yellow E",
     )
-    level4[2][2][0][1] = mazeRoom(number = "1.2", color = "blue", doors = listOf("south", "west"))
+    level4[2][2][0][1] = mazeRoom(number = "2.2", color = "blue", doors = listOf("south", "west"))
     //endregion
 
     //region level4 green

@@ -806,6 +806,7 @@ val mainGame = game {
     //region tutorial
     val tutorial = room() {
         onEnter { if (!hasStarted1) {
+            say("\"<a href='map01.png' target='_blank'>Test</a>\"")
             say("Welcome to Shift! Please read these instructions carefully!")
             say("In this game you will be explore a series of four-dimensional mazes.")
             say("PRESS THE ENTER KEY NOW TO CONTINUE")

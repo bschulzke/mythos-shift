@@ -340,6 +340,20 @@ fun mazeRoom(
                        
                     """.trimIndent())
         }
+        action("show map") {
+            if (currentLevel == level1) {
+                say("\"<a href='map01.png' target='_blank'>Click here</a>\"")
+            }
+            else if (currentLevel == level2) {
+                say("\"<a href='map02.png' target='_blank'>Click here</a>\"")
+            }
+            else if (currentLevel == level3) {
+                say("\"<a href='map03.png' target='_blank'>Click here</a>\"")
+            }
+            else if (currentLevel == level4) {
+                say("\"<a href='map04.png' target='_blank'>Click here</a>\"")
+            }
+        }
         action("push box (.*)", "push it (.*)", "push the box (.*)") {(direction) ->
             when (direction) {
                 "north" -> {

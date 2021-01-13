@@ -806,7 +806,6 @@ val mainGame = game {
     //region tutorial
     val tutorial = room() {
         onEnter { if (!hasStarted1) {
-            say("\"<a href='map01.png' target='_blank'>Test</a>\"")
             say("Welcome to Shift! Please read these instructions carefully!")
             say("In this game you will be explore a series of four-dimensional mazes.")
             say("PRESS THE ENTER KEY NOW TO CONTINUE")
@@ -852,8 +851,7 @@ val mainGame = game {
                        ▼
                        
                     """.trimIndent())
-                say("If you get stumped, you can try sketching a map of the maze on a piece of paper " +
-                        "to help you keep track of where you've been before.")
+                say("If you get stumped, you can say 'show map' to get a link to the map of your current level.")
                 intro4 = true
             }
             else if (!intro5) {

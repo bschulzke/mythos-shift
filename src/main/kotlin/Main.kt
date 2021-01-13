@@ -469,8 +469,8 @@ val mainGame = game {
             color = "yellow",
             doors = listOf("north", "west"),
             lock = "west",
-            link = Coordinates(0,2,0,1),
-            lockLetter = "C"
+            link = Coordinates(2,1,0,1),
+            lockLetter = "E"
     )
 
     level4[1][0][0][3] = mazeRoom(
@@ -492,8 +492,8 @@ val mainGame = game {
             color = "yellow",
             doors = listOf("north", "south",),
             lock = "south",
-            link = Coordinates(2, 1, 0, 1),
-            lockLetter = "E"
+            link = Coordinates(0, 2, 0, 1),
+            lockLetter = "C"
     )
 
     level4[2][0][0][3] = mazeRoom(

@@ -132,7 +132,7 @@ val mainGame = game {
     level1[0][0][0][0] = mazeRoom(
             number = "0.0.0",
             color = "red",
-            doors = listOf("east"),
+            doors = listOf(),
             ladderDirection = "up",
             other = "You finished Level 1! Would you like to go on? If so, say, 'yes.'",
             isFinish = true
@@ -171,8 +171,8 @@ val mainGame = game {
 
     level2[0][0][1][0] = mazeRoom(number = "0.0.1", color = "red", doors = listOf("east"),)
     level2[0][1][1][0] = mazeRoom(number= "0.1.1", color = "red", doors = listOf("west"),)
-    level2[1][0][1][0] = mazeRoom(number = "1.0.1", color = "red", doors = listOf(),)
-    level2[1][1][1][0] = mazeRoom(number = "1.1.1", color = "red", doors = listOf(),)
+    level2[1][0][1][0] = mazeRoom(number = "1.0.1", color = "red", doors = listOf("east"),)
+    level2[1][1][1][0] = mazeRoom(number = "1.1.1", color = "red", doors = listOf("west"),)
 
     level2[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("north", "east"),)
     level2[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("west", ),)

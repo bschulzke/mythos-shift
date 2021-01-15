@@ -189,7 +189,7 @@ val mainGame = game {
     ) {
         action("yes") {
             currentLevel = level3
-            boxes = listOf(Coordinates(x = 1, y = 1, z = 1, w = 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,0))
+            boxes = listOf(Coordinates(x = 1, y = 1, z = 1, w = 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,1))
             go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
     }
@@ -206,8 +206,6 @@ val mainGame = game {
             number = "1.1.0",
             color = "red",
             doors = listOf("south",),
-            hasPlate = true,
-            plateLetter = "blue B"
     )
 
 
@@ -227,7 +225,13 @@ val mainGame = game {
 
     //region level3 blue
     level3[0][0][0][1] = mazeRoom(number = "0.0.0", color = "blue", doors = listOf("east"), ladderDirection = "up")
-    level3[0][1][0][1] = mazeRoom(number = "0.1.0", color = "blue", doors = listOf("north", "west"),)
+    level3[0][1][0][1] = mazeRoom(
+            number = "0.1.0",
+            color = "blue",
+            doors = listOf("north", "west"),
+            hasPlate = true,
+            plateLetter = "blue B"
+    )
     level3[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf(),)
     level3[1][1][0][1] = mazeRoom(number = "1.1.0", color = "blue", doors = listOf("south"),)
 
@@ -237,7 +241,7 @@ val mainGame = game {
             doors = listOf("north", "east"),
             ladderDirection = "down",
             lock = "north",
-            link = Coordinates(1, 1,0,0),
+            link = Coordinates(1, 1,0,1),
             lockLetter = "B"
 
     )
@@ -894,7 +898,7 @@ val mainGame = game {
             player.z = 1
             player.w = 1
             currentLevel = level3
-            boxes = listOf(Coordinates(1, 1, 1, 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,0))
+            boxes = listOf(Coordinates(1, 1, 1, 1), Coordinates(0, 1, 1, 2), Coordinates(0,1,0,1))
             go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
         }
         action ("go to test") {

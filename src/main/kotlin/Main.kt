@@ -229,11 +229,16 @@ val mainGame = game {
             number = "0.1.0",
             color = "blue",
             doors = listOf("north", "west"),
-            hasPlate = true,
-            plateLetter = "blue B"
+
     )
     level3[1][0][0][1] = mazeRoom(number = "1.0.0", color = "blue", doors = listOf(),)
-    level3[1][1][0][1] = mazeRoom(number = "1.1.0", color = "blue", doors = listOf("south"),)
+    level3[1][1][0][1] = mazeRoom(
+            number = "1.1.0",
+            color = "blue",
+            doors = listOf("south"),
+            hasPlate = true,
+            plateLetter = "blue B",
+    )
 
     level3[0][0][1][1] = mazeRoom(
             number = "0.0.1",

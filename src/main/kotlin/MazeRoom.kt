@@ -353,6 +353,9 @@ fun mazeRoom(
             else if (currentLevel == level4) {
                 say("\"<a href='map04.png' target='_blank'>Click here</a>\"")
             }
+            else if (currentLevel == level5) {
+                say("\"<a href='map05.png' target='_blank'>Click here</a>\"")
+            }
         }
         action("push box (.*)", "push it (.*)", "push the box (.*)") {(direction) ->
             when (direction) {

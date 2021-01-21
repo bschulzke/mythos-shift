@@ -799,7 +799,7 @@ val mainGame = game {
             color = "orange",
             doors = listOf("west"),
             ladderDirection = "down",
-            other = "You've reached the third CHECKPOINT! The FINAL room in Level 5 is marked 2.0.1 in red."
+            other = "You've reached the third CHECKPOINT! The FINAL room in Level 5 is marked 0.2.1 in red."
     )
 
     level5[1][0][2][4] = mazeRoom(number = "1.0.2", color = "orange", doors = listOf("east", "north"),)

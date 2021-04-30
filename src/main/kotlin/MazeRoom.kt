@@ -177,11 +177,24 @@ fun mazeRoom(
                 doorText.contains("south") -> "└─═══─┘"
                 else -> "└─────┘"
             }
-            say("""
+            if (color == "yellow") {
+                say("""
+                    <span style="color:gold">
                         ${top}
                         ${middle}
                         ${bottom}
+                    </span>
                     """.trimIndent())
+            }
+            else {
+                say("""
+                    <span style="color:$color">
+                        ${top}
+                        ${middle}
+                        ${bottom}
+                    </span>
+                    """.trimIndent())
+            }
             say("The number $number is marked in $color on the floor. $doorText.$ladder")
             if (other != null) {
                 say("$other")

@@ -58,6 +58,11 @@ fun mazeRoom(
     }
 
     val room = room {
+        action("checkpoint", "Checkpoint") {
+            say("Your checkpoint code is: ${getLevel()}${player.x}${player.y}${player.z}${player.w}")
+            say("Copy or note this code down somewhere you won't lose it.")
+            say("Next time you begin the game, type \"Go to checkpoint: \" followed by your code to return here.")
+        }
         onEnter {
             val lockText = when {
                 lock != null && (lock.contains("up") || lock.contains("down")) &&
@@ -262,10 +267,10 @@ fun mazeRoom(
                 }
                 "west" -> {
                     if (
-                            player.y!! - 1 >= 0 &&
-                            currentLevel[player.x!!][player.y!! - 1][player.z!!][player.w!!] != null &&
+                            player.y - 1 >= 0 &&
+                            currentLevel[player.x][player.y - 1][player.z][player.w] != null &&
                             doorText.contains("west") && lockCheck(hasLock = lock, direction = direction, platePlace = link)) {
-                        player.y = player.y!! - 1
+                        player.y = player.y - 1
                         go(currentLevel[player.x!!][player.y!!][player.z!!][player.w!!]!!.room)
                     } else if (doorText.contains("west")) {
                         say("The door won't open.")

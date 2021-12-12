@@ -42,11 +42,16 @@ class Box(val coordinates: Coordinates) : Moveable {
 
     override fun failMove(direction: String): String {
         val myRoom = currentLevel.rooms[player.x][player.y][player.z][player.w]!!
-        return if (myRoom.doors.contains(direction)) "The door won't open."
+        return if (
+            direction != "north"
+            && direction != "south"
+            && direction != "east"
+            && direction != "west") "I don't understand"
+        else if (myRoom.doors.contains(direction)) "The door won't open."
         else "There's no door that way."
     }
 
-    override fun isInRoom(playerCoordinates: Coordinates): Boolean {
-        return playerCoordinates == coordinates
+    override fun isInRoom(coordinates: Coordinates): Boolean {
+        return coordinates == this.coordinates
     }
 }

@@ -1,11 +1,24 @@
 class Box(val coordinates: Coordinates) : Moveable {
     override fun canMove(direction: String): Boolean {
-        val myRoom = currentLevel[player.x][player.y][player.z][player.w]!!
+        val myRoom = currentLevel.rooms[player.x][player.y][player.z][player.w]!!
         return myRoom.doors.contains(direction) &&
                 myRoom.lockCheck(hasLock = myRoom.lock, direction = direction, platePlace = myRoom.link) &&
-                player.x + 1 < currentLevel.size &&
-                currentLevel[player.x + 1][player.y][player.z][player.w] != null
+                destinationNotNull(direction)
+    }
 
+    fun destinationNotNull(direction: String) : Boolean {
+        if (direction == "north") {
+            return currentLevel.rooms[player.x + 1][player.y][player.z][player.w] != null
+        } else if (direction == "south") {
+            return currentLevel.rooms[player.x - 1][player.y][player.z][player.w] != null
+        } else if (direction == "east") {
+            return currentLevel.rooms[player.x][player.y + 1][player.z][player.w] != null
+        }
+        else if (direction == "west") {
+            return currentLevel.rooms[player.x][player.y - 1][player.z][player.w] != null
+        } else {
+            return false
+        }
     }
 
     override fun move(direction: String) {
@@ -28,12 +41,17 @@ class Box(val coordinates: Coordinates) : Moveable {
     }
 
     override fun failMove(direction: String): String {
-        val myRoom = currentLevel[player.x][player.y][player.z][player.w]!!
-        return if (myRoom.doors.contains(direction)) "The door won't open."
+        val myRoom = currentLevel.rooms[player.x][player.y][player.z][player.w]!!
+        return if (
+            direction != "north"
+            && direction != "south"
+            && direction != "east"
+            && direction != "west") "I don't understand"
+        else if (myRoom.doors.contains(direction)) "The door won't open."
         else "There's no door that way."
     }
 
-    override fun isInRoom(playerCoordinates: Coordinates): Boolean {
-        return playerCoordinates == coordinates
+    override fun isInRoom(coordinates: Coordinates): Boolean {
+        return coordinates == this.coordinates
     }
 }
